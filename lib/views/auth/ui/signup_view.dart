@@ -1,32 +1,36 @@
 import 'package:e_commerce/core/app_colors.dart';
 import 'package:e_commerce/core/navigation_service.dart';
-import 'package:e_commerce/views/auth/ui/signup_view.dart';
+import 'package:e_commerce/views/auth/ui/login_view.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_email_text_form_field.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_forgot_pass_text_button.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_login_button.dart';
+import 'package:e_commerce/views/auth/ui/widgets/custom_name_text_form_field.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_sign_up_text_button.dart';
 import 'package:flutter/material.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
 bool _obscurePassword = true;
 
-class _LoginViewState extends State<LoginView> {
-  final TextEditingController emailController = TextEditingController();
+class _SignUpViewState extends State<SignUpView> {
+  final TextEditingController signUpEmailController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
-  void login() {
+  void signup() {
     if (_formKey.currentState!.validate()) {
-      String email = emailController.text;
+      String email = signUpEmailController.text;
+      String name = nameController.text;
       String password = passwordController.text;
 
+      print('Name: $name');
       print('Email: $email');
       print('Password: $password');
     }
@@ -68,9 +72,14 @@ class _LoginViewState extends State<LoginView> {
                           key: _formKey,
                           child: Column(
                             children: [
+                              //Name
+                              CustomNameTextFormField(
+                                emailController: nameController,
+                              ),
+                              const SizedBox(height: 16),
                               // Email
                               CustomEmailTextFormField(
-                                emailController: emailController,
+                                emailController: signUpEmailController,
                               ),
                               const SizedBox(height: 16),
                               // Password
@@ -129,18 +138,18 @@ class _LoginViewState extends State<LoginView> {
                             ],
                           ),
                         ),
-                        CustomForgotPassTextButton(),
-                        CustomLoginButton(ontap: login, buttonName: 'Login'),
+                        SizedBox(height: 12),
+                        CustomLoginButton(ontap: signup, buttonName: 'Sign Up'),
                         SizedBox(height: 12),
                         CustomLoginButton(
-                          ontap: login,
-                          buttonName: 'Login With Google',
+                          ontap: signup,
+                          buttonName: 'Sign Up With Google',
                         ),
                         SizedBox(height: 12),
                         CustomSignUpTextButton(
-                          nextPageName: 'Sign UP',
+                          nextPageName: 'Login',
                           onTap: () {
-                            NavigationService.pushTo(context, SignUpView());
+                            NavigationService.pop(context);
                           },
                         ),
                         SizedBox(height: 12),

@@ -1,28 +1,25 @@
-
 import 'package:e_commerce/core/app_colors.dart';
+import 'package:e_commerce/views/auth/ui/login_view.dart';
 import 'package:flutter/material.dart';
 
 class CustomSignUpTextButton extends StatelessWidget {
-  const CustomSignUpTextButton({
-    super.key,
-  });
+  const CustomSignUpTextButton({super.key, required this.nextPageName, required this.onTap});
 
+  final String nextPageName;
+  final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: [    
           Text(
-            'Already have an account? ',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-            ),
+            nextPageName == 'Sign UP' ?  'Already have an account? ' : 'Don\'t have an account? ',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
           ),
           Text(
-            'Sign Up',
+            nextPageName,
             style: TextStyle(
               color: AppColors.kPrimaryColor,
               fontWeight: FontWeight.bold,

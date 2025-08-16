@@ -1,12 +1,8 @@
-
 import 'package:e_commerce/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomEmailTextFormField extends StatelessWidget {
-  const CustomEmailTextFormField({
-    super.key,
-    required this.emailController,
-  });
+  const CustomEmailTextFormField({super.key, required this.emailController});
 
   final TextEditingController emailController;
 
@@ -16,28 +12,17 @@ class CustomEmailTextFormField extends StatelessWidget {
       controller: emailController,
       decoration: const InputDecoration(
         labelText: 'Email',
-        labelStyle: TextStyle(
-          color: AppColors.kLabelColor,
-        ),
+        labelStyle: TextStyle(fontSize: 14, color: AppColors.kLabelColor),
         border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.kBordersideColor,
-          ),
+          borderSide: BorderSide(color: AppColors.kBordersideColor),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.kBordersideColor,
-          ),
+          borderSide: BorderSide(color: AppColors.kBordersideColor),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.kBordersideColor,
-          ),
+          borderSide: BorderSide(color: AppColors.kBordersideColor),
         ),
-        contentPadding: EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 10,
-        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
       ),
       keyboardType: TextInputType.emailAddress,
       validator: (value) {

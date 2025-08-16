@@ -31,9 +31,12 @@ class _ForgotViewState extends State<ForgotView> {
           child: Column(
             children: [
               SizedBox(height: 70),
-              Text(
-                'Enter Yout Email to Reset Password',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  'Enter Yout Email to Reset Password',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
               ),
               SizedBox(height: 40),
               Padding(
@@ -64,7 +67,7 @@ class _ForgotViewState extends State<ForgotView> {
                                 emailController: forgotEmailController,
                               ),
                               const SizedBox(height: 16),
-                              CustomTextBTN(onTap: forgotPass,),
+                              CustomTextBTN(onTap: forgotPass),
                             ],
                           ),
                         ),
