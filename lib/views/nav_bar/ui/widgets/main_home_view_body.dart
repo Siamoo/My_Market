@@ -1,17 +1,18 @@
 import 'package:e_commerce/core/app_colors.dart';
+import 'package:e_commerce/views/home/home_view.dart';
 import 'package:e_commerce/views/nav_bar/logic/navigation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class MainHomeViewBody extends StatelessWidget {
-  const MainHomeViewBody({super.key});
+  MainHomeViewBody({super.key});
 
-  final List<Widget> screens = const [
-    Center(child: Text("Home")),
-    Center(child: Text("Search")),
-    Center(child: Text("Profile")),
-    Center(child: Text("Profile")),
+  final List<Widget> screens = [
+    HomeView(),
+    const Center(child: Text("Search")),
+    const Center(child: Text("Profile")),
+    const Center(child: Text("Profile")),
   ];
 
   @override
