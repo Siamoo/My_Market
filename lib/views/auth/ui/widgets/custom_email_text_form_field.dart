@@ -12,7 +12,7 @@ class CustomEmailTextFormField extends StatelessWidget {
       controller: emailController,
       decoration: const InputDecoration(
         labelText: 'Email',
-        labelStyle: TextStyle(fontSize: 14, color: AppColors.kLabelColor),
+        labelStyle: TextStyle(fontSize: 14, color: AppColors.kGreyColor),
         border: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.kBordersideColor),
         ),

@@ -18,7 +18,7 @@ class CustomNameTextFormField extends StatelessWidget {
         labelText: 'Name',
         labelStyle: TextStyle(
           fontSize: 14,
-          color: AppColors.kLabelColor,
+          color: AppColors.kGreyColor,
         ),
         border: OutlineInputBorder(
           borderSide: BorderSide(
