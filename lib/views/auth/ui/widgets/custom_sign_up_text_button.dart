@@ -1,5 +1,4 @@
 import 'package:e_commerce/core/app_colors.dart';
-import 'package:e_commerce/views/auth/ui/login_view.dart';
 import 'package:flutter/material.dart';
 
 class CustomSignUpTextButton extends StatelessWidget {

@@ -7,21 +7,26 @@ class CustomPopularCategoriesItem extends StatelessWidget {
   final String itemName;
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: AppColors.kPrimaryColor,
-          ),
-          child: IconButton(
-            onPressed: () {},
-            icon: Icon(iconData),
-            color: AppColors.kWhiteColor,
-          ),
+        Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: AppColors.kPrimaryColor,
+              ),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(iconData),
+                color: AppColors.kWhiteColor,
+              ),
+            ),
+            SizedBox(height: 2),
+            Text(itemName),
+          ],
         ),
-        SizedBox(height: 2),
-        Text(itemName),
+        SizedBox(width: 16),
       ],
     );
   }

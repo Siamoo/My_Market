@@ -1,6 +1,8 @@
-import 'package:e_commerce/core/app_colors.dart';
+import 'package:e_commerce/views/home/widgets/custom_home_recent_product_item.dart';
+import 'package:e_commerce/views/home/widgets/custom_image.dart';
 import 'package:e_commerce/views/home/widgets/custom_popular_categories_item.dart';
 import 'package:e_commerce/core/components/custom_serach_text_form_field.dart';
+import 'package:e_commerce/views/home/widgets/custom_populer_categories_list.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -8,8 +10,10 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 32),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 32),
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -18,15 +22,14 @@ class HomeViewBody extends StatelessWidget {
               children: [
                 CustomSearchTextFormField(),
                 SizedBox(height: 12),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/images/5694129.jpg',
-                    width: 255,
-                    height: 150,
-                    fit: BoxFit.cover,
+                Center(
+                  child: CustomImage(
+                    width: screenWidth * 0.93,
+                    height: screenHeight * 0.25,
+                    imageUrl: 'assets/images/5694129.jpg',
                   ),
                 ),
+
                 SizedBox(height: 18),
                 Text(
                   'Popular Categories',
@@ -39,22 +42,16 @@ class HomeViewBody extends StatelessWidget {
           SliverToBoxAdapter(
             child: SizedBox(
               height: 80,
-              child: ListView(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  CustomPopularCategoriesItem(iconData: Icons.collections, itemName: 'collections',),
-                  SizedBox(width: 16),
-                  CustomPopularCategoriesItem(iconData: Icons.sports, itemName: 'sports',),
-                  SizedBox(width: 16),
-                  CustomPopularCategoriesItem(iconData: Icons.book, itemName: 'books',),
-                  SizedBox(width: 16),
-                  CustomPopularCategoriesItem(iconData: Icons.gamepad, itemName: 'games',),
-                  SizedBox(width: 16),
-                  CustomPopularCategoriesItem(iconData: Icons.electric_bike, itemName: 'bikes',),
-                  SizedBox(width: 16),
-                  CustomPopularCategoriesItem(iconData: Icons.car_crash, itemName: 'cars',),
-
-                ],
+                itemCount: popularCategories.length,
+                itemBuilder: (context, index) {
+                  final item = popularCategories[index];
+                  return CustomPopularCategoriesItem(
+                    iconData: item['icon'],
+                    itemName: item['name'],
+                  );
+                },
               ),
             ),
           ),
@@ -64,21 +61,17 @@ class HomeViewBody extends StatelessWidget {
               children: [
                 SizedBox(height: 26),
                 Text(
-                  'Rexently Procucts',
+                  'Recent products',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'NO Products Yet!',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ],
+                CustomHomeRecentProductsItem(
+                  screenWidth: screenWidth,
+                  screenHeight: screenHeight,
+                  sale: 10,
+                  productName: 'Best Product',
+                  productCount: 253,
+                  pastCount: 290,
                 ),
               ],
             ),
