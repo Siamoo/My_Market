@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomImage extends StatelessWidget {
-  const CustomImage({super.key, required this.width, required this.height, required this.imageUrl});
+  const CustomImage({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.imageUrl,
+  });
   final double width;
   final double height;
   final String imageUrl;
@@ -10,7 +15,7 @@ class CustomImage extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Image.asset(
-        'assets/images/5694129.jpg',
+        imageUrl,
         width: width,
         height: height,
         fit: BoxFit.cover,

@@ -2,8 +2,8 @@ import 'package:e_commerce/core/app_colors.dart';
 import 'package:e_commerce/views/home/widgets/custom_image.dart';
 import 'package:flutter/material.dart';
 
-class CustomHomeRecentProductsItem extends StatelessWidget {
-  const CustomHomeRecentProductsItem({
+class CustomProductsItem extends StatelessWidget {
+  const CustomProductsItem({
     super.key,
     required this.screenWidth,
     required this.screenHeight,
@@ -19,12 +19,13 @@ class CustomHomeRecentProductsItem extends StatelessWidget {
   final String productName;
   final int productCount;
   final int pastCount;
+  final String imageUrl = 'assets/images/product.jpg';
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         child: Column(
           children: [
             Stack(
@@ -39,7 +40,7 @@ class CustomHomeRecentProductsItem extends StatelessWidget {
                   top:
                       (screenHeight *
                       0.00001), // 10% of image height above the image
-                  left: .5, // adjust as needed
+                  left: .005, // adjust as needed
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(

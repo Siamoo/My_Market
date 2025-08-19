@@ -14,9 +14,7 @@ class MyMarket extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.kScaffoldColor
-      ),
+      theme: ThemeData(scaffoldBackgroundColor: AppColors.kScaffoldColor),
       home: const MainHomeView(),
     );
   }

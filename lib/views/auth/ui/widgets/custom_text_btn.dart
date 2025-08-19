@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomTextBTN extends StatelessWidget {
   const CustomTextBTN({super.key, required this.onTap});
- final void Function() onTap;
+  final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -13,9 +13,7 @@ class CustomTextBTN extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         minimumSize: Size.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12), 
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: Text('Send', style: TextStyle(color: AppColors.kWhiteColor)),
     );

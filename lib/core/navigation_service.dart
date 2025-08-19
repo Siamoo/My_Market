@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 
 class NavigationService {
   static Future<T?> pushTo<T>(BuildContext context, Widget page) {
-    return Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => page),
-    );
+    return Navigator.push(context, MaterialPageRoute(builder: (_) => page));
   }
 
   static Future<T?> pushReplacementTo<T>(BuildContext context, Widget page) {

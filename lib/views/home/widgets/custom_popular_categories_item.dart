@@ -2,7 +2,11 @@ import 'package:e_commerce/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomPopularCategoriesItem extends StatelessWidget {
-  const CustomPopularCategoriesItem({super.key, required this.iconData, required this.itemName});
+  const CustomPopularCategoriesItem({
+    super.key,
+    required this.iconData,
+    required this.itemName,
+  });
   final IconData iconData;
   final String itemName;
   @override
