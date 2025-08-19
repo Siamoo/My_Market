@@ -1,5 +1,7 @@
 import 'package:e_commerce/core/app_colors.dart';
 import 'package:e_commerce/core/components/custom_image.dart';
+import 'package:e_commerce/core/navigation_service.dart';
+import 'package:e_commerce/views/product_details/ui/product_details_view.dart';
 import 'package:flutter/material.dart';
 
 class CustomProductsItem extends StatelessWidget {
@@ -25,103 +27,106 @@ class CustomProductsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(6.0),
-        child: Column(
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                CustomImage(
-                  width: screenWidth * 0.9,
-                  height: screenHeight * 0.22,
-                  imageUrl: 'assets/images/product.jpg',
-                ),
-                Positioned(
-                  top:
-                      (screenHeight *
-                      0.00001), // 10% of image height above the image
-                  left: .005, // adjust as needed
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: AppColors.kPrimaryColor,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
+    return InkWell(
+      onTap: ()=> NavigationService.pushTo(context, ProductDetailsView()),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: Column(
+            children: [
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  CustomImage(
+                    width: screenWidth * 0.9,
+                    height: screenHeight * 0.22,
+                    imageUrl: 'assets/images/product.jpg', borderRadius: 20,
+                  ),
+                  Positioned(
+                    top:
+                        (screenHeight *
+                        0.00001), // 10% of image height above the image
+                    left: .005, // adjust as needed
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: AppColors.kPrimaryColor,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                      ),
+                      child: Text(
+                        '$sale% Off',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    productName,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                  IconButton(
+                    onPressed: () {},
+                    icon: isfavoriteView ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
+                    color: AppColors.kPrimaryColor,
+                  ),
+                  SizedBox(width: 8),
+                ],
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        '$productCount LE',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      // ...inside your Column in the Row...
+                      Text(
+                        '$pastCount LE',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                          decoration: TextDecoration
+                              .lineThrough, // <-- this adds the line
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      backgroundColor: AppColors.kPrimaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     child: Text(
-                      '$sale% Off',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
+                      'buy now',
+                      style: TextStyle(color: AppColors.kWhiteColor),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Text(
-                  productName,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
-                IconButton(
-                  onPressed: () {},
-                  icon: isfavoriteView ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
-                  color: AppColors.kPrimaryColor,
-                ),
-                SizedBox(width: 8),
-              ],
-            ),
-            Row(
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      '$productCount LE',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    // ...inside your Column in the Row...
-                    Text(
-                      '$pastCount LE',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                        decoration: TextDecoration
-                            .lineThrough, // <-- this adds the line
-                      ),
-                    ),
-                  ],
-                ),
-                Spacer(),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    backgroundColor: AppColors.kPrimaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Text(
-                    'buy now',
-                    style: TextStyle(color: AppColors.kWhiteColor),
-                  ),
-                ),
-                SizedBox(width: 8),
-              ],
-            ),
-          ],
+                  SizedBox(width: 8),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
