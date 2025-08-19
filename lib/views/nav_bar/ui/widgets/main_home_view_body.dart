@@ -2,6 +2,7 @@ import 'package:e_commerce/core/app_colors.dart';
 import 'package:e_commerce/views/favorite/ui/favorite_view.dart';
 import 'package:e_commerce/views/home/home_view.dart';
 import 'package:e_commerce/views/nav_bar/logic/navigation_cubit.dart';
+import 'package:e_commerce/views/profile/ui/profile_view.dart';
 import 'package:e_commerce/views/store/ui/store_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,7 @@ class MainHomeViewBody extends StatelessWidget {
     HomeView(),
     StoreView(),
     FavoriteView(),
-    const Center(child: Text("Profile")),
+    ProfileView(),
   ];
 
   @override
