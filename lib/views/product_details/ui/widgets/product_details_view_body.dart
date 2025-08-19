@@ -1,5 +1,6 @@
 import 'package:e_commerce/core/app_colors.dart';
 import 'package:e_commerce/core/components/custom_image.dart';
+import 'package:e_commerce/core/components/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -8,6 +9,8 @@ class ProductDetailsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController reviewController = TextEditingController();
+    final formKey = GlobalKey<FormState>();
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -78,6 +81,7 @@ class ProductDetailsViewBody extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: 16),
                     Text(
                       'Product Description',
                       style: TextStyle(
@@ -97,6 +101,25 @@ class ProductDetailsViewBody extends StatelessWidget {
                           Icon(Icons.star, color: Colors.amber),
                       onRatingUpdate: (rating) {},
                     ),
+                    SizedBox(height: 8),
+                    Form(
+                      key: formKey,
+                      child: CustomTextFormField(
+                        controller: reviewController,
+                        labelText: 'review',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            Icons.send,
+                            size: 18,
+                            color: AppColors.kGreyColor,
+                          ),
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {}
+                          },
+                        ),
+                      ),
+                    ),
+                    
                   ],
                 ),
               ),
