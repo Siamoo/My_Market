@@ -1,5 +1,6 @@
 import 'package:e_commerce/core/app_colors.dart';
 import 'package:e_commerce/views/profile/ui/edit_name_view.dart';
+import 'package:e_commerce/views/profile/ui/my_orders_view.dart';
 import 'package:e_commerce/views/profile/ui/widgets/custom_profile_image.dart';
 import 'package:e_commerce/views/profile/ui/widgets/custom_profile_button.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class ProfileViewBody extends StatelessWidget {
             ),
             SizedBox(height: 16),
             CustomProfileButton(text: 'Edit Name', iconData: Icons.person, page: EditNameView(),),
-            CustomProfileButton(text: 'My Orders', iconData: Icons.store, page: EditNameView(),),
+            CustomProfileButton(text: 'My Orders', iconData: Icons.store, page: MyOrdersView(),),
             CustomProfileButton(text: 'Logout', iconData: Icons.logout, page: EditNameView(),),
           ],
         ),

@@ -40,7 +40,7 @@ class EditNameViewBody extends StatelessWidget {
                 CustomButton(
                   ontap: () {
                     if (formKey.currentState!.validate()) {
-                      String name = nameController.text;
+                      // String name = nameController.text;
                       // handle
                       Navigator.pop(context);
                     }
@@ -55,3 +55,4 @@ class EditNameViewBody extends StatelessWidget {
     );
   }
 }
+
