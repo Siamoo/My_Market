@@ -1,6 +1,6 @@
 import 'package:e_commerce/core/app_colors.dart';
 import 'package:e_commerce/views/profile/ui/widgets/custom_profile_image.dart';
-import 'package:e_commerce/views/profile/ui/widgets/custom_profilw_bottun.dart';
+import 'package:e_commerce/views/profile/ui/widgets/custom_profile_bottun.dart';
 import 'package:flutter/material.dart';
 
 class ProfileViewBody extends StatelessWidget {
