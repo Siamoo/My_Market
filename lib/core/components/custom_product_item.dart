@@ -1,5 +1,5 @@
 import 'package:e_commerce/core/app_colors.dart';
-import 'package:e_commerce/views/home/widgets/custom_image.dart';
+import 'package:e_commerce/core/components/custom_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomProductsItem extends StatelessWidget {
@@ -10,7 +10,7 @@ class CustomProductsItem extends StatelessWidget {
     required this.sale,
     required this.productName,
     required this.productCount,
-    required this.pastCount,
+    required this.pastCount, required this.isfavoriteView,
   });
 
   final double screenWidth;
@@ -20,6 +20,8 @@ class CustomProductsItem extends StatelessWidget {
   final int productCount;
   final int pastCount;
   final String imageUrl = 'assets/images/product.jpg';
+    final bool isfavoriteView;
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,7 @@ class CustomProductsItem extends StatelessWidget {
                 Spacer(),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.favorite_border),
+                  icon: isfavoriteView ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
                   color: AppColors.kPrimaryColor,
                 ),
                 SizedBox(width: 8),

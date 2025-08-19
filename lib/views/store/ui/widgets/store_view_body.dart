@@ -1,11 +1,9 @@
-import 'package:e_commerce/core/components/custom_image.dart';
 import 'package:e_commerce/core/components/custom_serach_text_form_field.dart';
 import 'package:e_commerce/core/components/products_sliver_list.dart';
-import 'package:e_commerce/views/home/widgets/proular_list_view.dart';
 import 'package:flutter/material.dart';
 
-class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({super.key});
+class StoreViewBody extends StatelessWidget {
+  const StoreViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,41 +15,14 @@ class HomeViewBody extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  'welcome to the Favorite',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 16),
                 CustomSearchTextFormField(),
-                SizedBox(height: 12),
-                Center(
-                  child: CustomImage(
-                    width: screenWidth * 0.93,
-                    height: screenHeight * 0.25,
-                    imageUrl: 'assets/images/5694129.jpg',
-                  ),
-                ),
-
-                SizedBox(height: 18),
-                Text(
-                  'Popular Categories',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 16),
-              ],
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(height: 80, child: PopularListview()),
-          ),
-
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 26),
-                Text(
-                  'Recently products',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 16),
               ],
             ),
           ),
