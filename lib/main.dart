@@ -1,8 +1,15 @@
 import 'package:e_commerce/core/app_colors.dart';
 import 'package:e_commerce/views/nav_bar/ui/main_home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://rmmvawnbnfdsyjbgturm.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJtbXZhd25ibmZkc3lqYmd0dXJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MjQ4MzEsImV4cCI6MjA3MTMwMDgzMX0.JP0URfz68ghCjFNX-g9GrVMNE7GWQda6rdzkVjpEews',
+  );
   runApp(const MyMarket());
 }
 
