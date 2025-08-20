@@ -1,4 +1,5 @@
 import 'package:e_commerce/core/app_colors.dart';
+import 'package:e_commerce/views/auth/ui/login_view.dart';
 import 'package:e_commerce/views/nav_bar/ui/main_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -22,7 +23,7 @@ class MyMarket extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(scaffoldBackgroundColor: AppColors.kScaffoldColor),
-      home: const MainHomeView(),
+      home: const LoginView(),
     );
   }
 }
