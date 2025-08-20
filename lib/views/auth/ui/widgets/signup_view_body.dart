@@ -3,44 +3,46 @@ import 'package:e_commerce/core/functions/navigation_service.dart';
 import 'package:e_commerce/core/functions/show_app_snack_bar.dart';
 import 'package:e_commerce/views/auth/logic/cubit/auth_cubit.dart';
 import 'package:e_commerce/views/auth/ui/login_view.dart';
-import 'package:e_commerce/views/auth/ui/signup_view.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_email_text_form_field.dart';
-import 'package:e_commerce/views/auth/ui/widgets/custom_forgot_pass_text_button.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_login_button.dart';
+import 'package:e_commerce/views/auth/ui/widgets/custom_name_text_form_field.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_sign_up_text_button.dart';
 import 'package:e_commerce/views/main%20home/ui/main_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginViewBody extends StatefulWidget {
-  const LoginViewBody({super.key});
+class SignUpViewBody extends StatefulWidget {
+  const SignUpViewBody({super.key});
 
   @override
-  State<LoginViewBody> createState() => _LoginViewBodyState();
+  State<SignUpViewBody> createState() => _SignUpViewBodyState();
 }
 
-class _LoginViewBodyState extends State<LoginViewBody> {
-  final TextEditingController emailController = TextEditingController();
+bool _obscurePassword = true;
+
+class _SignUpViewBodyState extends State<SignUpViewBody> {
+  final TextEditingController signUpEmailController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
-  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is LoginSuccess) {
-          showAppSnackBar(context, 'Login Successful');
+        if (state is SignupSuccess) {
+          showAppSnackBar(context, 'Signup Successful');
           NavigationService.pushReplacementTo(context, const MainHomeView());
         }
-        if (state is LoginFailure) {
+        if (state is SignupFailure) {
           showAppSnackBar(context, state.message);
         }
       },
       builder: (context, state) {
         AuthCubit cubit = context.read<AuthCubit>();
         return Scaffold(
-          body: state is LoginLoading
+          body: state is SignupLoading
               ? Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                   child: Center(
@@ -80,9 +82,15 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                     key: _formKey,
                                     child: Column(
                                       children: [
+                                        //Name
+                                        CustomNameTextFormField(
+                                          emailController: nameController,
+                                        ),
+                                        const SizedBox(height: 16),
                                         // Email
                                         CustomEmailTextFormField(
-                                          emailController: emailController,
+                                          emailController:
+                                              signUpEmailController,
                                         ),
                                         const SizedBox(height: 16),
                                         // Password
@@ -147,31 +155,31 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                       ],
                                     ),
                                   ),
-                                  CustomForgotPassTextButton(),
+                                  SizedBox(height: 12),
                                   CustomLoginButton(
                                     ontap: () {
                                       if (_formKey.currentState!.validate()) {
-                                        cubit.login(
-                                          emailController.text,
+                                        cubit.signup(
+                                          signUpEmailController.text,
                                           passwordController.text,
+                                          nameController.text,
                                         );
                                       }
                                     },
-                                    buttonName: 'Login',
+                                    buttonName: 'Sign Up',
                                   ),
                                   SizedBox(height: 12),
                                   CustomLoginButton(
-                                    ontap: () {},
-                                    buttonName: 'Login With Google',
+                                    ontap: () {
+                                      if (_formKey.currentState!.validate()) {}
+                                    },
+                                    buttonName: 'Sign Up With Google',
                                   ),
                                   SizedBox(height: 12),
                                   CustomSignUpTextButton(
-                                    nextPageName: 'Sign UP',
+                                    nextPageName: 'Login',
                                     onTap: () {
-                                      NavigationService.pushTo(
-                                        context,
-                                        SignupView(),
-                                      );
+                                      NavigationService.pop(context);
                                     },
                                   ),
                                   SizedBox(height: 12),
@@ -191,7 +199,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
   @override
   void dispose() {
-    emailController.dispose();
+    signUpEmailController.dispose();
+    nameController.dispose();
     passwordController.dispose();
     super.dispose();
   }

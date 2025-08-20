@@ -1,4 +1,4 @@
-import 'package:e_commerce/views/auth/ui/widgets/sign_view_body.dart';
+import 'package:e_commerce/views/auth/ui/widgets/signup_view_body.dart';
 import 'package:flutter/material.dart';
 
 class SignupView extends StatelessWidget {

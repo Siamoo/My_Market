@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -22,10 +21,9 @@ class AuthCubit extends Cubit<AuthState> {
       } else {
         emit(LoginSuccess());
       }
-    }on AuthApiException catch (e) {
+    } on AuthApiException catch (e) {
       emit(LoginFailure(e.message));
-    }
-     catch (e) {
+    } catch (e) {
       emit(LoginFailure(e.toString()));
     }
   }
@@ -34,12 +32,12 @@ class AuthCubit extends Cubit<AuthState> {
     emit(SignupLoading());
     try {
       final response = await client.auth.signUp(
-  email: email,
-  password: password,
-  data: {
-    'name': name, // Pass the name here
-  },
-);
+        email: email,
+        password: password,
+        data: {
+          'name': name, // Pass the name here
+        },
+      );
       if (response.user == null) {
         emit(SignupFailure('Signup failed. Please check your information.'));
       } else {
