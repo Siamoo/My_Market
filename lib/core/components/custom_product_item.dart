@@ -1,6 +1,6 @@
 import 'package:e_commerce/core/app_colors.dart';
 import 'package:e_commerce/core/components/custom_image.dart';
-import 'package:e_commerce/core/navigation_service.dart';
+import 'package:e_commerce/core/functions/navigation_service.dart';
 import 'package:e_commerce/views/product_details/ui/product_details_view.dart';
 import 'package:flutter/material.dart';
 

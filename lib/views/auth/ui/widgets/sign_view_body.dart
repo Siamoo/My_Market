@@ -1,5 +1,5 @@
 import 'package:e_commerce/core/app_colors.dart';
-import 'package:e_commerce/core/navigation_service.dart';
+import 'package:e_commerce/core/functions/navigation_service.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_email_text_form_field.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_login_button.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_name_text_form_field.dart';
