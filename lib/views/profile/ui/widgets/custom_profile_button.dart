@@ -1,27 +1,24 @@
 import 'package:e_commerce/core/app_colors.dart';
-import 'package:e_commerce/core/functions/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 class CustomProfileButton extends StatelessWidget {
   const CustomProfileButton({
     super.key,
     required this.text,
-    required this.iconData,
-    required this.page,
+    required this.iconData, required this.onTap,
+    
   });
 
   final String text;
   final IconData iconData;
-  final Widget page;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
       child: InkWell(
-        onTap: () {
-          NavigationService.pushTo(context, page);
-        },
+        onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
             color: AppColors.kPrimaryColor,

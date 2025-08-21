@@ -2,7 +2,6 @@ import 'package:e_commerce/core/app_colors.dart';
 import 'package:e_commerce/core/functions/navigation_service.dart';
 import 'package:e_commerce/core/functions/show_app_snack_bar.dart';
 import 'package:e_commerce/views/auth/logic/cubit/auth_cubit.dart';
-import 'package:e_commerce/views/auth/ui/login_view.dart';
 import 'package:e_commerce/views/auth/ui/signup_view.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_email_text_form_field.dart';
 import 'package:e_commerce/views/auth/ui/widgets/custom_forgot_pass_text_button.dart';
