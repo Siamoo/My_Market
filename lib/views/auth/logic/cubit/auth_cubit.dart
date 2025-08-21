@@ -7,12 +7,12 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
-  final SupabaseClient client = Supabase.instance.client;
+  final SupabaseClient user = Supabase.instance.client;
 
   Future<void> login(String email, String password) async {
     emit(LoginLoading());
     try {
-      final response = await client.auth.signInWithPassword(
+      final response = await user.auth.signInWithPassword(
         email: email,
         password: password,
       );
@@ -31,7 +31,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> signup(String email, String password, String name) async {
     emit(SignupLoading());
     try {
-      final response = await client.auth.signUp(
+      final response = await user.auth.signUp(
         email: email,
         password: password,
         data: {
