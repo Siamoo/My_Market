@@ -24,3 +24,14 @@ final class SignupFailure extends AuthState {
 
   SignupFailure(this.message);
 }
+
+final class GoogleLoading extends AuthState {}
+
+final class GoogleSuccess extends AuthState {}
+
+final class GoogleFailure extends AuthState {
+  final String message;
+
+  GoogleFailure(this.message);
+
+}
