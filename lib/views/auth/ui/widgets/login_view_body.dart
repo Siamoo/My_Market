@@ -23,23 +23,26 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _obscurePassword = true;
+  
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is LoginSuccess) {
+        if (state is LoginSuccess || state is GoogleSuccess) {
           showAppSnackBar(context, 'Login Successful');
           NavigationService.pushReplacementTo(context, const MainHomeView());
-        }
-        if (state is LoginFailure) {
+        } else if (state is GoogleFailure) {
+          showAppSnackBar(context, state.message);
+        } else if (state is LoginFailure) {
           showAppSnackBar(context, state.message);
         }
       },
       builder: (context, state) {
         AuthCubit cubit = context.read<AuthCubit>();
+
         return Scaffold(
-          body: state is LoginLoading
+          body: state is LoginLoading || state is GoogleLoading
               ? Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                   child: Center(
@@ -160,7 +163,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                   ),
                                   SizedBox(height: 12),
                                   CustomLoginButton(
-                                    ontap: () {},
+                                    ontap: () {
+                                      cubit.signInWithGoogle();
+                                    },
                                     buttonName: 'Login With Google',
                                   ),
                                   SizedBox(height: 12),
