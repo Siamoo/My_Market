@@ -32,7 +32,7 @@ class MyMarket extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(scaffoldBackgroundColor: AppColors.kScaffoldColor),
-        home: user.auth.currentUser != null ? const LoginView() : const LoginView(),
+        home: user.auth.currentUser != null ? const MainHomeView() : const LoginView(),
       ),
     );
   }

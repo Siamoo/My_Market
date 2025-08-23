@@ -15,70 +15,69 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {
-        if (state is GetUserFailure) {
-          showAppSnackBar(context, state.message);
-        }
-      },
-      builder: (context, state) {
-        final userDataModel = context.read<AuthCubit>().userDataModel;
-        
-        return Scaffold(
-          body: state is GetUserLoading
+    return BlocProvider(
+      create: (context) => AuthCubit()..getUserprofile(),
+      child: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is GetUserFailure) {
+            showAppSnackBar(context, state.message);
+          }
+        },
+        builder: (context, state) {
+          final userDataModel = context.read<AuthCubit>().userDataModel;
+          return state is GetUserLoading
               ? Center(child: CircularProgressIndicator())
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(height: 32),
-                    CustomProfileImage(),
-                    SizedBox(height: 16),
-                    Text(
-                      userDataModel?.name ?? 'User Name',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+              : Scaffold(
+                  body: Column(
+                    children: [
+                      SizedBox(height: 120),
+                      CustomProfileImage(),
+                      SizedBox(height: 16),
+                      Text(
+                        userDataModel?.name ?? 'User Name',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      userDataModel?.email ?? 'User Email',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.kGreyColor,
+                      Text(
+                        userDataModel?.email ?? 'User Email',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.kGreyColor,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 16),
-                    CustomProfileButton(
-                      text: 'Edit Name',
-                      iconData: Icons.person,
-                      onTap: () {
-                        NavigationService.pushTo(context, EditNameView());
-                      },
-                    ),
-                    CustomProfileButton(
-                      text: 'My Orders',
-                      iconData: Icons.store,
-                      onTap: () {
-                        NavigationService.pushTo(context, MyOrdersView());
-                      },
-                    ),
-                    CustomProfileButton(
-                      text: 'Logout',
-                      iconData: Icons.logout,
-                      onTap: () async {
-                        NavigationService.pushReplacementTo(
-                          context,
-                          LoginView(),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-        );
-      },
+                      SizedBox(height: 16),
+                      CustomProfileButton(
+                        text: 'Edit Name',
+                        iconData: Icons.person,
+                        onTap: () {
+                          NavigationService.pushTo(context, EditNameView());
+                        },
+                      ),
+                      CustomProfileButton(
+                        text: 'My Orders',
+                        iconData: Icons.store,
+                        onTap: () {
+                          NavigationService.pushTo(context, MyOrdersView());
+                        },
+                      ),
+                      CustomProfileButton(
+                        text: 'Logout',
+                        iconData: Icons.logout,
+                        onTap: () async {
+                          await context.read<AuthCubit>().signOut();
+                          NavigationService.pushTo(context, LoginView());
+                        },
+                      ),
+                    ],
+                  ),
+                );
+        },
+      ),
     );
   }
 }
