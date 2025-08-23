@@ -45,3 +45,15 @@ final class ResetPasswordFailure extends AuthState {
 
   ResetPasswordFailure(this.message);
 }
+
+
+
+final class UpsertUserLoading extends AuthState {}
+
+final class UpsertUserSuccess extends AuthState {}
+
+final class UpsertUserFailure extends AuthState {
+  final String message;
+
+  UpsertUserFailure(this.message);
+}

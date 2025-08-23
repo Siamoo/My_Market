@@ -10,7 +10,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   final SupabaseClient supabase = Supabase.instance.client;
 
-  // ✅ Your Web Client ID (Google Cloud Console → OAuth 2.0 Client IDs)
+  /// Google Sign-In configuration
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email', 'profile'],
     clientId:
@@ -28,6 +28,7 @@ class AuthCubit extends Cubit<AuthState> {
       if (response.user == null || response.session == null) {
         emit(LoginFailure('Login failed. Please check your credentials.'));
       } else {
+        await _upsertUserProfile(response.user!);
         emit(LoginSuccess());
       }
     } on AuthApiException catch (e) {
@@ -49,6 +50,7 @@ class AuthCubit extends Cubit<AuthState> {
       if (response.user == null) {
         emit(SignupFailure('Signup failed. Please check your information.'));
       } else {
+        await _upsertUserProfile(response.user!, name: name);
         emit(SignupSuccess());
       }
     } on AuthApiException catch (e) {
@@ -82,6 +84,7 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       if (response.user != null && response.session != null) {
+        await _upsertUserProfile(response.user!, name: googleUser.displayName);
         emit(GoogleSuccess());
       } else {
         emit(GoogleFailure("Google authentication failed"));
@@ -93,6 +96,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  /// Password Reset
   Future<void> resetPassword(String email) async {
     emit(ResetPasswordLoading());
     try {
@@ -102,6 +106,24 @@ class AuthCubit extends Cubit<AuthState> {
       emit(ResetPasswordFailure(e.message));
     } catch (e) {
       emit(ResetPasswordFailure(e.toString()));
+    }
+  }
+
+  /// Upsert User Profile
+  Future<void> _upsertUserProfile(User user, {String? name}) async {
+    emit(UpsertUserLoading());
+    try {
+      await supabase.from('profiles').upsert({
+        'id': user.id,
+        'email': user.email,
+        'name': name ?? user.userMetadata!['name'],
+        'updated_at': DateTime.now().toIso8601String(),
+      });
+      emit(UpsertUserSuccess());
+    } on PostgrestException catch (e) {
+      emit(UpsertUserFailure(e.message));
+    } catch (e) {
+      emit(UpsertUserFailure(e.toString()));
     }
   }
 
