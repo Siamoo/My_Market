@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:e_commerce/views/auth/logic/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -29,6 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(LoginFailure('Login failed. Please check your credentials.'));
       } else {
         await _upsertUserProfile(response.user!);
+        await getUserprofile();
         emit(LoginSuccess());
       }
     } on AuthApiException catch (e) {
@@ -51,6 +55,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(SignupFailure('Signup failed. Please check your information.'));
       } else {
         await _upsertUserProfile(response.user!, name: name);
+        await getUserprofile();
         emit(SignupSuccess());
       }
     } on AuthApiException catch (e) {
@@ -85,6 +90,7 @@ class AuthCubit extends Cubit<AuthState> {
 
       if (response.user != null && response.session != null) {
         await _upsertUserProfile(response.user!, name: googleUser.displayName);
+        await getUserprofile();
         emit(GoogleSuccess());
       } else {
         emit(GoogleFailure("Google authentication failed"));
@@ -124,6 +130,35 @@ class AuthCubit extends Cubit<AuthState> {
       emit(UpsertUserFailure(e.message));
     } catch (e) {
       emit(UpsertUserFailure(e.toString()));
+    }
+  }
+
+  /// Get User Profile
+  UserDataModel? userDataModel;
+  Future<void> getUserprofile() async {
+    emit(GetUserLoading());
+    try {
+      final user = supabase.auth.currentUser;
+      if (user == null) {
+        emit(GetUserFailure("No authenticated user"));
+        return;
+      }
+
+      final data = await supabase
+          .from('profiles')
+          .select()
+          .eq('id', user.id)
+          .single();
+      userDataModel = UserDataModel(
+        id: data['id'],
+        email: data['email'],
+        name: data['name'],
+      );
+      emit(GetUserSuccess());
+    } on PostgrestException catch (e) {
+      emit(GetUserFailure(e.message));
+    } catch (e) {
+      emit(GetUserFailure(e.toString()));
     }
   }
 

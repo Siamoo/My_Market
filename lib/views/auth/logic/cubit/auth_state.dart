@@ -35,7 +35,6 @@ final class GoogleFailure extends AuthState {
   GoogleFailure(this.message);
 }
 
-
 final class ResetPasswordLoading extends AuthState {}
 
 final class ResetPasswordSuccess extends AuthState {}
@@ -46,8 +45,6 @@ final class ResetPasswordFailure extends AuthState {
   ResetPasswordFailure(this.message);
 }
 
-
-
 final class UpsertUserLoading extends AuthState {}
 
 final class UpsertUserSuccess extends AuthState {}
@@ -56,4 +53,15 @@ final class UpsertUserFailure extends AuthState {
   final String message;
 
   UpsertUserFailure(this.message);
+}
+
+final class GetUserLoading extends AuthState {}
+
+final class GetUserSuccess extends AuthState {
+}
+
+final class GetUserFailure extends AuthState {
+  final String message;
+
+  GetUserFailure(this.message);
 }
