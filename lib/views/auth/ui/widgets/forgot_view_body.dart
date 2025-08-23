@@ -26,6 +26,18 @@ class _ForgotViewBodyState extends State<ForgotViewBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Forgot Password',
+          style: TextStyle(color: AppColors.kWhiteColor),
+        ),
+        backgroundColor: AppColors.kPrimaryColor,
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.kWhiteColor),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
