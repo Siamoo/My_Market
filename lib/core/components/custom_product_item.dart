@@ -1,6 +1,7 @@
 import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:e_commerce/core/components/custom_image.dart';
 import 'package:e_commerce/core/functions/navigation_service.dart';
+import 'package:e_commerce/core/models/product_model/product_model.dart';
 import 'package:e_commerce/views/product_details/ui/product_details_view.dart';
 import 'package:flutter/material.dart';
 
@@ -9,21 +10,12 @@ class CustomProductsItem extends StatelessWidget {
     super.key,
     required this.screenWidth,
     required this.screenHeight,
-    required this.sale,
-    required this.productName,
-    required this.productCount,
-    required this.pastCount,
-    required this.isfavoriteView,
+    required this.product,
   });
 
   final double screenWidth;
   final double screenHeight;
-  final int sale;
-  final String productName;
-  final int productCount;
-  final int pastCount;
-  final String imageUrl = 'assets/images/product.jpg';
-  final bool isfavoriteView;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +29,21 @@ class CustomProductsItem extends StatelessWidget {
               Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  CustomImage(
-                    width: screenWidth * 0.9,
-                    height: screenHeight * 0.22,
-                    imageUrl: 'assets/images/product.jpg',
-                    borderRadius: 20,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      width: screenWidth * .9,
+                      height: screenHeight * 0.3,
+                      product.imageUrl ?? 'https://www.nxp.com/assets/images/en/icons/icon-hardware-INA.svg?imwidth=320',
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(child: CircularProgressIndicator());
+                      },
+                      errorBuilder: (context, error, stackTrace) => Center(
+                        child: Icon(Icons.error, size: 40, color: Colors.red),
+                      ),
+                    ),
                   ),
                   Positioned(
                     top:
@@ -61,7 +63,7 @@ class CustomProductsItem extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        '$sale% Off',
+                        '${product.sale}% Off',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -75,13 +77,13 @@ class CustomProductsItem extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    productName,
+                    product.productName ?? 'Product',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
                   IconButton(
                     onPressed: () {},
-                    icon: isfavoriteView
+                    icon: product.favoriteProducts!.isNotEmpty
                         ? Icon(Icons.favorite)
                         : Icon(Icons.favorite_border),
                     color: AppColors.kPrimaryColor,
@@ -94,7 +96,7 @@ class CustomProductsItem extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        '$productCount LE',
+                        '${product.price} LE',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -102,7 +104,7 @@ class CustomProductsItem extends StatelessWidget {
                       ),
                       // ...inside your Column in the Row...
                       Text(
-                        '$pastCount LE',
+                        '${product.oldPrice} LE',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,

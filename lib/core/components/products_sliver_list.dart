@@ -1,6 +1,5 @@
 import 'package:e_commerce/core/components/custom_product_item.dart';
 import 'package:e_commerce/core/cubit/home_cubit.dart';
-import 'package:e_commerce/views/home/widgets/home_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,7 +21,11 @@ class ProductsSliverList extends StatelessWidget {
       create: (context) => HomeCubit()..getProducts(),
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
-          // TODO: implement listener
+          if (state is GetDataLoading){
+            const Center(child: CircularProgressIndicator());
+          } else if (state is GetDataError) {
+            const Center(child: Text('Something went wrong'));
+          }
         },
         builder: (context, state) {
           List products = context.read<HomeCubit>().products;
@@ -31,12 +34,8 @@ class ProductsSliverList extends StatelessWidget {
               final product = products[index];
               return CustomProductsItem(
                 screenWidth: screenWidth,
-                screenHeight: screenHeight,
-                sale: 10,
-                productName: 'Product',
-                productCount: 253,
-                pastCount: 290,
-                isfavoriteView: false,
+                screenHeight: screenHeight, product: product,
+                
               );
             }, childCount: products.length),
           );

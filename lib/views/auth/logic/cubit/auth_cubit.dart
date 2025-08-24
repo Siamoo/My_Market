@@ -143,7 +143,7 @@ class AuthCubit extends Cubit<AuthState> {
       }
 
       final data = await supabase
-          .from('profiles')
+          .from('users')
           .select()
           .eq('id', user.id)
           .single();
