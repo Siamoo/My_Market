@@ -16,6 +16,7 @@ class CustomPopularCategoriesItem extends StatelessWidget {
         Column(
           children: [
             Container(
+              padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: AppColors.kPrimaryColor,
