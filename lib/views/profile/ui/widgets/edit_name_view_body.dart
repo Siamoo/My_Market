@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/app_colors.dart';
+import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:e_commerce/core/components/custom_button.dart';
 import 'package:e_commerce/core/components/custom_text_form_field.dart';
 import 'package:flutter/material.dart';

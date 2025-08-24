@@ -1,5 +1,5 @@
 
-import 'package:e_commerce/core/app_colors.dart';
+import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ProductInfo extends StatelessWidget {

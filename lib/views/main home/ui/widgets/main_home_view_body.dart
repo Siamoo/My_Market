@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/app_colors.dart';
+import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:e_commerce/views/favorite/ui/favorite_view.dart';
 import 'package:e_commerce/views/home/home_view.dart';
 import 'package:e_commerce/views/main%20home/logic/navigation_cubit.dart';
