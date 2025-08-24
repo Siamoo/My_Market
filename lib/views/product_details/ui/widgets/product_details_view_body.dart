@@ -45,7 +45,10 @@ class ProductDetailsViewBody extends StatelessWidget {
                 child: Column(
                   children: [
                     ProductInfo(),
-                    RatingApp(formKey: formKey, reviewController: reviewController),
+                    RatingApp(
+                      formKey: formKey,
+                      reviewController: reviewController,
+                    ),
 
                     SizedBox(height: 8),
                     Row(

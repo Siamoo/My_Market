@@ -122,6 +122,7 @@ class _ForgotViewBodyState extends State<ForgotViewBody> {
       },
     );
   }
+
   @override
   void dispose() {
     forgotEmailController.dispose();

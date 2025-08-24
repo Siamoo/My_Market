@@ -23,7 +23,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _obscurePassword = true;
-  
 
   @override
   Widget build(BuildContext context) {

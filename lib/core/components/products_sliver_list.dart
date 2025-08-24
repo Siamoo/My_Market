@@ -25,19 +25,20 @@ class ProductsSliverList extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
+          List products = context.read<HomeCubit>().products;
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
-              final product = recentProducts[index];
+              final product = products[index];
               return CustomProductsItem(
                 screenWidth: screenWidth,
                 screenHeight: screenHeight,
-                sale: product['sale'],
-                productName: product['productName'],
-                productCount: product['productCount'],
-                pastCount: product['pastCount'],
-                isfavoriteView: isfavoriteView,
+                sale: 10,
+                productName: 'Product',
+                productCount: 253,
+                pastCount: 290,
+                isfavoriteView: false,
               );
-            }, childCount: recentProducts.length),
+            }, childCount: products.length),
           );
         },
       ),

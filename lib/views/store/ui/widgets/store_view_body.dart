@@ -29,7 +29,8 @@ class StoreViewBody extends StatelessWidget {
 
           ProductsSliverList(
             screenWidth: screenWidth,
-            screenHeight: screenHeight, isfavoriteView: false,
+            screenHeight: screenHeight,
+            isfavoriteView: false,
           ),
         ],
       ),

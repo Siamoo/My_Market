@@ -1,10 +1,7 @@
-
 import 'package:flutter/material.dart';
 
 class CustomCommentsListView extends StatelessWidget {
-  const CustomCommentsListView({
-    super.key,
-  });
+  const CustomCommentsListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,21 +15,14 @@ class CustomCommentsListView extends StatelessWidget {
             leading: CircleAvatar(
               backgroundImage: AssetImage(comment['image']!),
             ),
-            title: Text(
-              comment['name']!,
-              style: TextStyle(fontSize: 14),
-            ),
-            subtitle: Text(
-              comment['comment']!,
-              style: TextStyle(fontSize: 12),
-            ),
+            title: Text(comment['name']!, style: TextStyle(fontSize: 14)),
+            subtitle: Text(comment['comment']!, style: TextStyle(fontSize: 12)),
           );
         },
       ),
     );
   }
 }
-
 
 final List<Map<String, String>> comments = [
   {

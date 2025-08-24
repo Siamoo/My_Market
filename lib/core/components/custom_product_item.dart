@@ -12,7 +12,8 @@ class CustomProductsItem extends StatelessWidget {
     required this.sale,
     required this.productName,
     required this.productCount,
-    required this.pastCount, required this.isfavoriteView,
+    required this.pastCount,
+    required this.isfavoriteView,
   });
 
   final double screenWidth;
@@ -22,13 +23,12 @@ class CustomProductsItem extends StatelessWidget {
   final int productCount;
   final int pastCount;
   final String imageUrl = 'assets/images/product.jpg';
-    final bool isfavoriteView;
-
+  final bool isfavoriteView;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> NavigationService.pushTo(context, ProductDetailsView()),
+      onTap: () => NavigationService.pushTo(context, ProductDetailsView()),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(6.0),
@@ -40,7 +40,8 @@ class CustomProductsItem extends StatelessWidget {
                   CustomImage(
                     width: screenWidth * 0.9,
                     height: screenHeight * 0.22,
-                    imageUrl: 'assets/images/product.jpg', borderRadius: 20,
+                    imageUrl: 'assets/images/product.jpg',
+                    borderRadius: 20,
                   ),
                   Positioned(
                     top:
@@ -48,7 +49,10 @@ class CustomProductsItem extends StatelessWidget {
                         0.00001), // 10% of image height above the image
                     left: .005, // adjust as needed
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.kPrimaryColor,
                         borderRadius: BorderRadius.only(
@@ -77,7 +81,9 @@ class CustomProductsItem extends StatelessWidget {
                   Spacer(),
                   IconButton(
                     onPressed: () {},
-                    icon: isfavoriteView ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
+                    icon: isfavoriteView
+                        ? Icon(Icons.favorite)
+                        : Icon(Icons.favorite_border),
                     color: AppColors.kPrimaryColor,
                   ),
                   SizedBox(width: 8),
@@ -111,7 +117,10 @@ class CustomProductsItem extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
                       backgroundColor: AppColors.kPrimaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),

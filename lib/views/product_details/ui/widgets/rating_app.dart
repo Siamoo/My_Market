@@ -1,4 +1,3 @@
-
 import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:e_commerce/core/components/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +19,7 @@ class RatingApp extends StatelessWidget {
       children: [
         Text(
           'Product Description',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 8),
         RatingBar.builder(
@@ -33,8 +29,7 @@ class RatingApp extends StatelessWidget {
           allowHalfRating: false,
           itemCount: 5,
           itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-          itemBuilder: (context, _) =>
-              Icon(Icons.star, color: Colors.amber),
+          itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber),
           onRatingUpdate: (rating) {},
         ),
         SizedBox(height: 8),
@@ -44,11 +39,7 @@ class RatingApp extends StatelessWidget {
             controller: reviewController,
             labelText: 'review',
             suffixIcon: IconButton(
-              icon: Icon(
-                Icons.send,
-                size: 18,
-                color: AppColors.kGreyColor,
-              ),
+              icon: Icon(Icons.send, size: 18, color: AppColors.kGreyColor),
               onPressed: () {
                 if (formKey.currentState!.validate()) {}
               },

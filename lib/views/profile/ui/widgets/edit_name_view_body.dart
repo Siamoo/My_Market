@@ -55,4 +55,3 @@ class EditNameViewBody extends StatelessWidget {
     );
   }
 }
-

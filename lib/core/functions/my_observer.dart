@@ -28,7 +28,7 @@ class MyObserver implements BlocObserver {
   void onClose(BlocBase bloc) {
     // Handle bloc closure if needed
   }
-  
+
   @override
   void onCreate(BlocBase bloc) {
     log('Bloc created: ${bloc.runtimeType}');

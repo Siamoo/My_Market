@@ -1,4 +1,3 @@
-
 import 'package:e_commerce/views/auth/logic/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

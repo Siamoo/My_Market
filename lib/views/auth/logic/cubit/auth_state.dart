@@ -57,8 +57,7 @@ final class UpsertUserFailure extends AuthState {
 
 final class GetUserLoading extends AuthState {}
 
-final class GetUserSuccess extends AuthState {
-}
+final class GetUserSuccess extends AuthState {}
 
 final class GetUserFailure extends AuthState {
   final String message;

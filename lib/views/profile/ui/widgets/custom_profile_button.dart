@@ -5,8 +5,8 @@ class CustomProfileButton extends StatelessWidget {
   const CustomProfileButton({
     super.key,
     required this.text,
-    required this.iconData, required this.onTap,
-    
+    required this.iconData,
+    required this.onTap,
   });
 
   final String text;
