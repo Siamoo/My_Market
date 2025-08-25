@@ -17,11 +17,12 @@ class ProductDetailsViewBody extends StatelessWidget {
     final formKey = GlobalKey<FormState>();
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    
     return BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
       listener: (context, state) {},
       builder: (context, state) {
-       int avgRate =context.read<ProductDetailsCubit>().avgRate;
-           final userRate = context.read<ProductDetailsCubit>().userRate;
+         final cubit =context.read<ProductDetailsCubit>();
+        ;
 
         return Scaffold(
           appBar: AppBar(
@@ -70,10 +71,11 @@ class ProductDetailsViewBody extends StatelessWidget {
                           ),
                           child: Column(
                             children: [
-                              ProductInfo(product: product, avgRate: avgRate,),
+                              ProductInfo(product: product, avgRate: cubit.avgRate),
                               RatingApp(
                                 formKey: formKey,
-                                reviewController: reviewController, userRate: userRate, 
+                                reviewController: reviewController,
+                                userRate: cubit.userRate,
                               ),
 
                               SizedBox(height: 8),

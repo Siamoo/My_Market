@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:e_commerce/core/functions/api_services.dart';
@@ -26,18 +25,22 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
         rates.add(Rate.fromJson(element));
       }
       _getAvgRate();
-      List<Rate> userRates = rates
-          .where(
-            (rate) =>
-                rate.forUser == Supabase.instance.client.auth.currentUser!.id,
-          )
-          .toList();
-      if (userRates.isNotEmpty) {
-        userRate = userRates[0].rate!;
-      }
+      _getUserRate();
       emit(GetRateSuccess());
     } catch (e) {
       emit(GetRateError());
+    }
+  }
+
+  void _getUserRate() {
+    List<Rate> userRates = rates
+        .where(
+          (rate) =>
+              rate.forUser == Supabase.instance.client.auth.currentUser!.id,
+        )
+        .toList();
+    if (userRates.isNotEmpty) {
+      userRate = userRates[0].rate!;
     }
   }
 
