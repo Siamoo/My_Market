@@ -12,14 +12,17 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   ProductDetailsCubit( ) : super(ProductDetailsInitial());
 
   final ApiServices _apiServices = ApiServices();
-
+  List<Rate> rates = [];
+  int avgRate = 0;
   Future<void> getRates({required String productId}) async {
     emit(GetRateLoading());
     try {
       Response<dynamic> response = await _apiServices.getData(
         'rates_table?select=*&for_product=eq.$productId',
       );
-        
+        for (var element in response.data) {
+          rates.add(Rate.fromJson(element));
+        }
      
 
       emit(GetRateSuccess());
