@@ -34,7 +34,8 @@ class CustomProductsItem extends StatelessWidget {
                     child: Image.network(
                       width: screenWidth * .9,
                       height: screenHeight * 0.3,
-                      product.imageUrl ?? 'https://www.nxp.com/assets/images/en/icons/icon-hardware-INA.svg?imwidth=320',
+                      product.imageUrl ??
+                          'https://www.nxp.com/assets/images/en/icons/icon-hardware-INA.svg?imwidth=320',
                       fit: BoxFit.cover,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;

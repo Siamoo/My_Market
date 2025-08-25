@@ -21,7 +21,7 @@ class ProductsSliverList extends StatelessWidget {
       create: (context) => HomeCubit()..getProducts(),
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
-          if (state is GetDataLoading){
+          if (state is GetDataLoading) {
             const Center(child: CircularProgressIndicator());
           } else if (state is GetDataError) {
             const Center(child: Text('Something went wrong'));
@@ -34,8 +34,8 @@ class ProductsSliverList extends StatelessWidget {
               final product = products[index];
               return CustomProductsItem(
                 screenWidth: screenWidth,
-                screenHeight: screenHeight, product: product,
-                
+                screenHeight: screenHeight,
+                product: product,
               );
             }, childCount: products.length),
           );
