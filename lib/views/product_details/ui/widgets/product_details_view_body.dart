@@ -20,7 +20,7 @@ class ProductDetailsViewBody extends StatelessWidget {
     return BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
       listener: (context, state) {},
       builder: (context, state) {
-        List rates = context.read<ProductDetailsCubit>().rates;
+        // List rates = context.read<ProductDetailsCubit>().rates;
        int avgRate =context.read<ProductDetailsCubit>().avgRate;
         return Scaffold(
           appBar: AppBar(

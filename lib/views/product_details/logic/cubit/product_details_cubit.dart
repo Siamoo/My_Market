@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commerce/core/functions/api_services.dart';
 import 'package:e_commerce/views/product_details/logic/models/rate.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'product_details_state.dart';
 
@@ -23,18 +23,22 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       for (var element in response.data) {
         rates.add(Rate.fromJson(element));
       }
-      if (rates.isNotEmpty) {
-        int total = 0;
-        for (var rate in rates) {
-          total += rate.rate!;
-        }
-        avgRate = (total / rates.length).toInt();
-      }
+      _getAvgRate();
       log(avgRate.toString());
       emit(GetRateSuccess());
     } catch (e) {
       log(e.toString());
       emit(GetRateError());
+    }
+  }
+
+  void _getAvgRate() {
+    if (rates.isNotEmpty) {
+      int total = 0;
+      for (var rate in rates) {
+        total += rate.rate!;
+      }
+      avgRate = (total / rates.length).toInt();
     }
   }
 }

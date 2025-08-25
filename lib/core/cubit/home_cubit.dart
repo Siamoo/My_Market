@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commerce/core/functions/api_services.dart';
 import 'package:e_commerce/core/models/product_model/product_model.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'home_state.dart';
 
