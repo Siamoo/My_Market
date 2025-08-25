@@ -7,11 +7,12 @@ class RatingApp extends StatelessWidget {
   const RatingApp({
     super.key,
     required this.formKey,
-    required this.reviewController,
+    required this.reviewController,  required this.userRate,
   });
 
   final GlobalKey<FormState> formKey;
   final TextEditingController reviewController;
+  final int userRate;
 
 
   @override
@@ -24,7 +25,7 @@ class RatingApp extends StatelessWidget {
         ),
         SizedBox(height: 8),
         RatingBar.builder(
-          initialRating: 1,
+          initialRating: userRate.toDouble(),
           minRating: 1,
           direction: Axis.horizontal,
           allowHalfRating: false,

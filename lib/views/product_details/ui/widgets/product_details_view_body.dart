@@ -20,8 +20,9 @@ class ProductDetailsViewBody extends StatelessWidget {
     return BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
       listener: (context, state) {},
       builder: (context, state) {
-        // List rates = context.read<ProductDetailsCubit>().rates;
        int avgRate =context.read<ProductDetailsCubit>().avgRate;
+           final userRate = context.read<ProductDetailsCubit>().userRate;
+
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -72,7 +73,7 @@ class ProductDetailsViewBody extends StatelessWidget {
                               ProductInfo(product: product, avgRate: avgRate,),
                               RatingApp(
                                 formKey: formKey,
-                                reviewController: reviewController, 
+                                reviewController: reviewController, userRate: userRate, 
                               ),
 
                               SizedBox(height: 8),
