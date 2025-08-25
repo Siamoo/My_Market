@@ -1,5 +1,4 @@
 import 'package:e_commerce/core/functions/app_colors.dart';
-import 'package:e_commerce/core/components/custom_image.dart';
 import 'package:e_commerce/core/functions/navigation_service.dart';
 import 'package:e_commerce/core/models/product_model/product_model.dart';
 import 'package:e_commerce/views/product_details/ui/product_details_view.dart';
@@ -20,7 +19,10 @@ class CustomProductsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => NavigationService.pushTo(context, ProductDetailsView()),
+      onTap: () => NavigationService.pushTo(
+        context,
+        ProductDetailsView(product: product),
+      ),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(6.0),

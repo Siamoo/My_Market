@@ -1,8 +1,11 @@
 import 'package:e_commerce/core/functions/app_colors.dart';
+import 'package:e_commerce/core/models/product_model/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductInfo extends StatelessWidget {
-  const ProductInfo({super.key});
+  const ProductInfo({super.key, required this.product, required this.avgRate});
+  final ProductModel product;
+  final int avgRate;
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +15,11 @@ class ProductInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'books',
+              product.productName ?? 'name',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Text(
-              '200 LE',
+              '${product.price} LE',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ],
@@ -25,15 +28,15 @@ class ProductInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '4.5 ⭐',
+              '$avgRate ⭐',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             IconButton(
               onPressed: () {},
-              icon: Icon(
-                Icons.favorite_border_outlined,
-                color: AppColors.kPrimaryColor,
-              ),
+              icon: product.favoriteProducts!.isNotEmpty
+                  ? Icon(Icons.favorite)
+                  : Icon(Icons.favorite_border),
+              color: AppColors.kPrimaryColor,
             ),
           ],
         ),

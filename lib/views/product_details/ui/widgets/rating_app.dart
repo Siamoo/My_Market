@@ -1,5 +1,6 @@
 import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:e_commerce/core/components/custom_text_form_field.dart';
+import 'package:e_commerce/views/product_details/logic/models/rate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -12,6 +13,7 @@ class RatingApp extends StatelessWidget {
 
   final GlobalKey<FormState> formKey;
   final TextEditingController reviewController;
+
 
   @override
   Widget build(BuildContext context) {

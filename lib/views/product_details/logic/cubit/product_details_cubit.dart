@@ -9,7 +9,7 @@ import 'package:equatable/equatable.dart';
 part 'product_details_state.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
-  ProductDetailsCubit( ) : super(ProductDetailsInitial());
+  ProductDetailsCubit() : super(ProductDetailsInitial());
 
   final ApiServices _apiServices = ApiServices();
   List<Rate> rates = [];
@@ -20,11 +20,17 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       Response<dynamic> response = await _apiServices.getData(
         'rates_table?select=*&for_product=eq.$productId',
       );
-        for (var element in response.data) {
-          rates.add(Rate.fromJson(element));
+      for (var element in response.data) {
+        rates.add(Rate.fromJson(element));
+      }
+      if (rates.isNotEmpty) {
+        int total = 0;
+        for (var rate in rates) {
+          total += rate.rate!;
         }
-     
-
+        avgRate = (total / rates.length).toInt();
+      }
+      log(avgRate.toString());
       emit(GetRateSuccess());
     } catch (e) {
       log(e.toString());
