@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:e_commerce/core/functions/api_services.dart';
@@ -12,6 +13,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   ProductDetailsCubit() : super(ProductDetailsInitial());
 
   final ApiServices _apiServices = ApiServices();
+  var userId = Supabase.instance.client.auth.currentUser!.id;
   List<Rate> rates = [];
   int avgRate = 0;
   int userRate = 4;
@@ -32,12 +34,29 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     }
   }
 
+  Future<void> addOrUpdateRate({
+    required String productId,
+    required Map<String, dynamic> data,
+  }) async {
+    String endpoint =
+        'rates_table?select=*&for_product=eq.$productId&for_user=eq.$userId';
+    emit(AddOrUpdateRateLoading());
+    try {
+      if (_chackIsUserRate(productId)) {
+        await _apiServices.patchData(endpoint, data);
+      } else {
+        await _apiServices.postData(endpoint, data);
+      }
+      emit(AddOrUpdateRateSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(AddOrUpdateRateError());
+    }
+  }
+
   void _getUserRate() {
     List<Rate> userRates = rates
-        .where(
-          (rate) =>
-              rate.forUser == Supabase.instance.client.auth.currentUser!.id,
-        )
+        .where((rate) => rate.forUser == userId)
         .toList();
     if (userRates.isNotEmpty) {
       userRate = userRates[0].rate!;
@@ -52,5 +71,14 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       }
       avgRate = (total / rates.length).toInt();
     }
+  }
+
+  bool _chackIsUserRate(String productId) {
+    for (var rate in rates) {
+      if (rate.forProduct == productId && rate.forUser == userId) {
+        return true;
+      }
+    }
+    return false;
   }
 }
