@@ -1,6 +1,8 @@
 import 'package:e_commerce/core/functions/app_colors.dart';
+import 'package:e_commerce/core/functions/navigation_service.dart';
 import 'package:e_commerce/core/models/product_model/product_model.dart';
 import 'package:e_commerce/views/product_details/logic/cubit/product_details_cubit.dart';
+import 'package:e_commerce/views/product_details/ui/product_details_view.dart';
 import 'package:e_commerce/views/product_details/ui/widgets/custom_comments_list_view.dart';
 import 'package:e_commerce/views/product_details/ui/widgets/product_info.dart';
 import 'package:e_commerce/views/product_details/ui/widgets/rating_app.dart';
@@ -17,13 +19,16 @@ class ProductDetailsViewBody extends StatelessWidget {
     final formKey = GlobalKey<FormState>();
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    
-    return BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-         final cubit =context.read<ProductDetailsCubit>();
-        ;
 
+    return BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
+      listener: (context, state) {
+        if (state is AddOrUpdateRateSuccess) {
+          NavigationService.navigateWithoutBack(context, ProductDetailsView(product: product));
+          
+        }
+      },
+      builder: (context, state) {
+        final cubit = context.read<ProductDetailsCubit>();
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -71,11 +76,15 @@ class ProductDetailsViewBody extends StatelessWidget {
                           ),
                           child: Column(
                             children: [
-                              ProductInfo(product: product, avgRate: cubit.avgRate),
+                              ProductInfo(
+                                product: product,
+                                avgRate: cubit.avgRate,
+                              ),
                               RatingApp(
                                 formKey: formKey,
                                 reviewController: reviewController,
                                 userRate: cubit.userRate,
+                                product: product,
                               ),
 
                               SizedBox(height: 8),

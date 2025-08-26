@@ -15,4 +15,11 @@ class NavigationService {
   static void pop<T>(BuildContext context, [T? result]) {
     Navigator.pop(context, result);
   }
+
+  static Future<T?> navigateWithoutBack<T>(BuildContext context, Widget page) {
+    return Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => page),
+    );
+  }
 }

@@ -16,7 +16,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   var userId = Supabase.instance.client.auth.currentUser!.id;
   List<Rate> rates = [];
   int avgRate = 0;
-  int userRate = 4;
+  int numOfRates = 0;
+  int userRate = 5;
   Future<void> getRates({required String productId}) async {
     emit(GetRateLoading());
     try {
@@ -28,6 +29,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       }
       _getAvgRate();
       _getUserRate();
+      numOfRates = rates.length;
       emit(GetRateSuccess());
     } catch (e) {
       emit(GetRateError());
