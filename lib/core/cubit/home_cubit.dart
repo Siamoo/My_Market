@@ -13,7 +13,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   final ApiServices _apiServices = ApiServices();
   List<ProductModel> products = [];
-  Future<void> getProducts() async {
+  List<ProductModel> searchProducts = [];
+  Future<void> getProducts({String? query}) async {
     emit(GetDataLoading());
     try {
       Response<dynamic> response = await _apiServices.getData(
@@ -22,10 +23,20 @@ class HomeCubit extends Cubit<HomeState> {
       for (var element in response.data) {
         products.add(ProductModel.fromJson(element));
       }
+      search(query);
       emit(GetDataSuccess());
     } catch (e) {
       log(e.toString());
       emit(GetDataError());
+    }
+  }
+
+  void search(String? query) {
+    List<ProductModel> searchProducts = [];
+    for (var product in products) {
+      if (product.productName!.toLowerCase().contains(query!.toLowerCase())) {
+        searchProducts.add(product);
+      }
     }
   }
 }
