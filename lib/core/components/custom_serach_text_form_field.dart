@@ -2,8 +2,8 @@ import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearchTextFormField extends StatelessWidget {
-  const CustomSearchTextFormField({super.key});
-
+  const CustomSearchTextFormField({super.key, required this.onPressed});
+final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
     final TextEditingController searchController = TextEditingController();
@@ -34,7 +34,7 @@ class CustomSearchTextFormField extends StatelessWidget {
               color: AppColors.kPrimaryColor,
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: onPressed,
               icon: Icon(Icons.search),
               color: AppColors.kWhiteColor,
             ),

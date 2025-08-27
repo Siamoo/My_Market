@@ -21,7 +21,6 @@ class MyObserver implements BlocObserver {
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     // Handle errors if needed
-    print('Error in bloc: $bloc, Error: $error');
   }
 
   @override
