@@ -36,9 +36,9 @@ class CustomCommentsListView extends StatelessWidget {
             itemBuilder: (context, index) {
               final comment = comments[index];
               return ListTile(
-                title: Text(comment['user_name']!, style: TextStyle(fontSize: 16)),
+                title: Text(comment['user_name'] ?? 'Unknown User', style: TextStyle(fontSize: 16)),
                 subtitle: Text(
-                  comment['comment']!,
+                  comment['comment']! ?? 'No comment',
                   style: TextStyle(fontSize: 12),
                 ),
               );
