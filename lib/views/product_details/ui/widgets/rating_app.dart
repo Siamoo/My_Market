@@ -1,5 +1,3 @@
-import 'package:e_commerce/core/functions/app_colors.dart';
-import 'package:e_commerce/core/components/custom_text_form_field.dart';
 import 'package:e_commerce/core/models/product_model/product_model.dart';
 import 'package:e_commerce/views/product_details/logic/cubit/product_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +7,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class RatingApp extends StatelessWidget {
   const RatingApp({
     super.key,
-    required this.formKey,
-    required this.reviewController,
     required this.userRate,
     required this.product,
   });
 
-  final GlobalKey<FormState> formKey;
-  final TextEditingController reviewController;
   final int userRate;
   final ProductModel product;
 
@@ -50,20 +44,9 @@ class RatingApp extends StatelessWidget {
           },
         ),
         SizedBox(height: 8),
-        Form(
-          key: formKey,
-          child: CustomTextFormField(
-            controller: reviewController,
-            labelText: 'review',
-            suffixIcon: IconButton(
-              icon: Icon(Icons.send, size: 18, color: AppColors.kGreyColor),
-              onPressed: () {
-                if (formKey.currentState!.validate()) {}
-              },
-            ),
-          ),
-        ),
       ],
     );
   }
 }
+
+
