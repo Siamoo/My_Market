@@ -107,7 +107,7 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
                                   ),
                                 ],
                               ),
-                              CustomCommentsListView(),
+                              CustomCommentsListView(product: widget.product,),
                             ],
                           ),
                         ),
@@ -119,6 +119,7 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
       },
     );
   }
+
   @override
   void dispose() {
     reviewController.dispose();
