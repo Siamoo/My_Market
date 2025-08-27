@@ -8,17 +8,18 @@ class ProductsSliverList extends StatelessWidget {
     super.key,
     required this.screenWidth,
     required this.screenHeight,
-    required this.isfavoriteView,
+     this.searchQuery,
   });
 
   final double screenWidth;
   final double screenHeight;
-  final bool isfavoriteView;
+
+  final String? searchQuery;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit()..getProducts(),
+      create: (context) => HomeCubit()..getProducts(query: searchQuery),
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
           if (state is GetDataLoading) {
@@ -28,7 +29,7 @@ class ProductsSliverList extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          List products = context.read<HomeCubit>().products;
+          List products = searchQuery != null ? context.read<HomeCubit>().searchProducts : context.read<HomeCubit>().products;
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               final product = products[index];

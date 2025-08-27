@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:e_commerce/core/functions/app_colors.dart';
+import 'package:e_commerce/core/functions/navigation_service.dart';
+import 'package:e_commerce/views/home/search_view.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearchTextFormField extends StatelessWidget {
-  const CustomSearchTextFormField({super.key, required this.onPressed});
-final void Function() onPressed;
+  const CustomSearchTextFormField({super.key});
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController searchController = TextEditingController();
@@ -34,7 +38,15 @@ final void Function() onPressed;
               color: AppColors.kPrimaryColor,
             ),
             child: IconButton(
-              onPressed: onPressed,
+              onPressed: () {
+                if (searchController.text.isNotEmpty) {
+                  NavigationService.pushTo(
+                    context,
+                    SearchView(searchQuery: searchController.text),
+                  );
+                }
+                searchController.clear();
+              },
               icon: Icon(Icons.search),
               color: AppColors.kWhiteColor,
             ),

@@ -22,7 +22,7 @@ class StoreViewBody extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 16),
-                CustomSearchTextFormField(onPressed: () {  },),
+                CustomSearchTextFormField(),
               ],
             ),
           ),
@@ -30,7 +30,7 @@ class StoreViewBody extends StatelessWidget {
           ProductsSliverList(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
-            isfavoriteView: false,
+            
           ),
         ],
       ),

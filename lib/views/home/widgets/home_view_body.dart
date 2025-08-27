@@ -1,8 +1,6 @@
 import 'package:e_commerce/core/components/custom_image.dart';
 import 'package:e_commerce/core/components/custom_serach_text_form_field.dart';
 import 'package:e_commerce/core/components/products_sliver_list.dart';
-import 'package:e_commerce/core/functions/navigation_service.dart';
-import 'package:e_commerce/views/home/search_view.dart';
 import 'package:e_commerce/views/home/widgets/proular_list_view.dart';
 import 'package:flutter/material.dart';
 
@@ -22,11 +20,7 @@ class HomeViewBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 6),
-                CustomSearchTextFormField(
-                  onPressed: () {
-                    NavigationService.pushTo(context, SearchView());
-                  },
-                ),
+                CustomSearchTextFormField(),
                 SizedBox(height: 12),
                 Center(
                   child: CustomImage(
@@ -66,7 +60,6 @@ class HomeViewBody extends StatelessWidget {
           ProductsSliverList(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
-            isfavoriteView: false,
           ),
         ],
       ),

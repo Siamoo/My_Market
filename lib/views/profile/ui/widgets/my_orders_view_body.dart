@@ -27,7 +27,6 @@ class MyOrdersViewBody extends StatelessWidget {
           ProductsSliverList(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
-            isfavoriteView: false,
           ),
         ],
       ),

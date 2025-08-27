@@ -28,7 +28,7 @@ class FavoriteViewBody extends StatelessWidget {
           ProductsSliverList(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
-            isfavoriteView: true,
+            
           ),
         ],
       ),

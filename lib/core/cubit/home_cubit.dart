@@ -32,7 +32,6 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void search(String? query) {
-    List<ProductModel> searchProducts = [];
     for (var product in products) {
       if (product.productName!.toLowerCase().contains(query!.toLowerCase())) {
         searchProducts.add(product);
