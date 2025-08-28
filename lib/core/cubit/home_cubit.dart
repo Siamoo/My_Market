@@ -17,12 +17,14 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> searchProducts = [];
   List<ProductModel> categorieProducts = [];
   SupabaseClient client = Supabase.instance.client;
+  Map<String, bool> favoriteProducts = {};
   Future<void> getProducts({String? query, String? categorie}) async {
     emit(GetDataLoading());
     try {
       Response<dynamic> response = await _apiServices.getData(
         'products_table?select=*,favorite_products(*),purchase_table(*)',
       );
+      
       for (var element in response.data) {
         products.add(ProductModel.fromJson(element));
       }
@@ -37,8 +39,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future addOrDeleteFavorite({required String productId}) async {
     String endpoint =
-        '{{baseUrl}}favorite_products?for_user=eq.${client.auth.currentUser!.id}&for_product=eq.$productId';
-    emit(AddToFavoriteLoading());
+        'favorite_products?for_user=eq.${client.auth.currentUser!.id}&for_product=eq.$productId';
+    emit(AddOrDeleteFavoriteLoading());
     try {
       Response<dynamic> response = await _apiServices.getData(endpoint);
       if (response.data.isEmpty) {
@@ -47,14 +49,16 @@ class HomeCubit extends Cubit<HomeState> {
           "for_user": client.auth.currentUser!.id,
           "for_product": productId,
         });
-        emit(AddToFavoriteSuccess());
+        favoriteProducts.addAll({productId: true});
+        emit(AddOrDeleteFavoriteSuccess());
       } else {
         await _apiServices.deleteData(endpoint);
-        emit(AddToFavoriteSuccess());
+        
+        emit(AddOrDeleteFavoriteSuccess());
       }
     } catch (e) {
       log(e.toString());
-      emit(AddToFavoriteError());
+      emit(AddOrDeleteFavoriteError());
     }
   }
 
@@ -77,4 +81,9 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
   }
+  bool checkIsFavorite(String productId) {
+  return favoriteProducts.containsKey(productId) ;
 }
+}
+
+

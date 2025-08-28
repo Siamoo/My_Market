@@ -24,9 +24,7 @@ class ProductsSliverList extends StatelessWidget {
           HomeCubit()..getProducts(query: searchQuery, categorie: categorie),
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
-          if (state is GetDataLoading) {
-            const Center(child: CircularProgressIndicator());
-          } else if (state is GetDataError) {
+           if (state is GetDataError || state is AddOrDeleteFavoriteError) {
             const Center(child: Text('Something went wrong'));
           }
         },
@@ -39,7 +37,7 @@ class ProductsSliverList extends StatelessWidget {
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               final product = products[index];
-              return state is GetDataLoading
+              return state is GetDataLoading 
                   ? const Center(child: CircularProgressIndicator())
                   : CustomProductsItem(
                       screenWidth: screenWidth,

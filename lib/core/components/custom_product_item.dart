@@ -1,8 +1,11 @@
+import 'package:e_commerce/core/cubit/home_cubit.dart';
 import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:e_commerce/core/functions/navigation_service.dart';
 import 'package:e_commerce/core/models/product_model/product_model.dart';
+import 'package:e_commerce/views/home/home_view.dart';
 import 'package:e_commerce/views/product_details/ui/product_details_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomProductsItem extends StatelessWidget {
   const CustomProductsItem({
@@ -18,6 +21,7 @@ class CustomProductsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeCubit homeCubit = context.read<HomeCubit>();
     return InkWell(
       onTap: () => NavigationService.pushTo(
         context,
@@ -85,8 +89,10 @@ class CustomProductsItem extends StatelessWidget {
                   ),
                   Spacer(),
                   IconButton(
-                    onPressed: () {},
-                    icon: product.favoriteProducts!.isNotEmpty
+                    onPressed: () {
+                      homeCubit.addOrDeleteFavorite(productId: product.id!);
+                    },
+                    icon: homeCubit.checkIsFavorite(product.id!)
                         ? Icon(Icons.favorite)
                         : Icon(Icons.favorite_border),
                     color: AppColors.kPrimaryColor,
