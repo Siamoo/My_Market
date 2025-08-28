@@ -24,7 +24,7 @@ class HomeCubit extends Cubit<HomeState> {
       Response<dynamic> response = await _apiServices.getData(
         'products_table?select=*,favorite_products(*),purchase_table(*)',
       );
-      
+
       for (var element in response.data) {
         products.add(ProductModel.fromJson(element));
       }
@@ -53,7 +53,7 @@ class HomeCubit extends Cubit<HomeState> {
         emit(AddOrDeleteFavoriteSuccess());
       } else {
         await _apiServices.deleteData(endpoint);
-        
+        favoriteProducts.removeWhere((key, value) => key == productId);
         emit(AddOrDeleteFavoriteSuccess());
       }
     } catch (e) {
@@ -81,9 +81,8 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
   }
+
   bool checkIsFavorite(String productId) {
-  return favoriteProducts.containsKey(productId) ;
+    return favoriteProducts.containsKey(productId);
+  }
 }
-}
-
-
