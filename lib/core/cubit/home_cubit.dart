@@ -6,7 +6,6 @@ import 'package:e_commerce/core/models/product_model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -24,10 +23,13 @@ class HomeCubit extends Cubit<HomeState> {
       Response<dynamic> response = await _apiServices.getData(
         'products_table?select=*,favorite_products(*),purchase_table(*)',
       );
-
       for (var element in response.data) {
         products.add(ProductModel.fromJson(element));
       }
+      favoriteProducts.addAll({
+        for (var element in products.where((element) => element.favoriteProducts!.isNotEmpty) )
+          element.id!: (element.favoriteProducts!.first.forUser == client.auth.currentUser!.id)
+      });
       search(query);
       categories(categorie);
       emit(GetDataSuccess());
