@@ -5,6 +5,7 @@ import 'package:e_commerce/core/functions/api_services.dart';
 import 'package:e_commerce/core/models/product_model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'home_state.dart';
 
@@ -15,6 +16,7 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> products = [];
   List<ProductModel> searchProducts = [];
   List<ProductModel> categorieProducts = [];
+  SupabaseClient client = Supabase.instance.client;
   Future<void> getProducts({String? query, String? categorie}) async {
     emit(GetDataLoading());
     try {
@@ -30,6 +32,29 @@ class HomeCubit extends Cubit<HomeState> {
     } catch (e) {
       log(e.toString());
       emit(GetDataError());
+    }
+  }
+
+  Future addOrDeleteFavorite({required String productId}) async {
+    String endpoint =
+        '{{baseUrl}}favorite_products?for_user=eq.${client.auth.currentUser!.id}&for_product=eq.$productId';
+    emit(AddToFavoriteLoading());
+    try {
+      Response<dynamic> response = await _apiServices.getData(endpoint);
+      if (response.data.isEmpty) {
+        await _apiServices.postData(endpoint, {
+          "is_favorite": true,
+          "for_user": client.auth.currentUser!.id,
+          "for_product": productId,
+        });
+        emit(AddToFavoriteSuccess());
+      } else {
+        await _apiServices.deleteData(endpoint);
+        emit(AddToFavoriteSuccess());
+      }
+    } catch (e) {
+      log(e.toString());
+      emit(AddToFavoriteError());
     }
   }
 
