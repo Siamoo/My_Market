@@ -2,8 +2,8 @@ import 'package:e_commerce/views/home/widgets/custom_popular_categories_item.dar
 import 'package:e_commerce/views/home/widgets/custom_populer_categories_list.dart';
 import 'package:flutter/material.dart';
 
-class PopularListview extends StatelessWidget {
-  const PopularListview({super.key});
+class PopularCategoriesListview extends StatelessWidget {
+  const PopularCategoriesListview({super.key});
 
   @override
   Widget build(BuildContext context) {

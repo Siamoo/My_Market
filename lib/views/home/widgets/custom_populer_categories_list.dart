@@ -5,6 +5,6 @@ final List<Map<String, dynamic>> popularCategories = [
   {'icon': Icons.sports, 'name': 'sports'},
   {'icon': Icons.book, 'name': 'books'},
   {'icon': Icons.gamepad, 'name': 'games'},
-  {'icon': Icons.electric_bike, 'name': 'bikes'},
+  {'icon': Icons.electrical_services, 'name': 'electronics'},
   {'icon': Icons.car_crash, 'name': 'cars'},
 ];

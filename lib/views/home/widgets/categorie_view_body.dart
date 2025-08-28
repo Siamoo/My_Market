@@ -1,12 +1,10 @@
-
 import 'package:e_commerce/core/components/products_sliver_list.dart';
 import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class SearchViewBody extends StatelessWidget {
-  const SearchViewBody({super.key, required this.searchQuery});
-  final String searchQuery;
-
+class CategorieViewBody extends StatelessWidget {
+  const CategorieViewBody({super.key, required this.categorie});
+  final String categorie;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -14,8 +12,8 @@ class SearchViewBody extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          'Search Results',
+        title:  Text(
+          categorie,
           style: TextStyle(color: AppColors.kWhiteColor),
         ),
         backgroundColor: AppColors.kPrimaryColor,
@@ -29,7 +27,7 @@ class SearchViewBody extends StatelessWidget {
           ProductsSliverList(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
-            searchQuery: searchQuery,
+            categorie: categorie,
           ),
         ],
       ),

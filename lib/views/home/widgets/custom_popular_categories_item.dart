@@ -1,4 +1,6 @@
 import 'package:e_commerce/core/functions/app_colors.dart';
+import 'package:e_commerce/core/functions/navigation_service.dart';
+import 'package:e_commerce/views/home/categorie_view.dart';
 import 'package:flutter/material.dart';
 
 class CustomPopularCategoriesItem extends StatelessWidget {
@@ -11,28 +13,31 @@ class CustomPopularCategoriesItem extends StatelessWidget {
   final String itemName;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: AppColors.kPrimaryColor,
-              ),
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(iconData),
-                color: AppColors.kWhiteColor,
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: AppColors.kPrimaryColor,
             ),
-            SizedBox(height: 2),
-            Text(itemName),
-          ],
-        ),
-        SizedBox(width: 16),
-      ],
+            child: IconButton(
+              onPressed: () {
+                NavigationService.pushTo(
+                  context,
+                  CategorieView(categorie: itemName),
+                );
+              },
+              icon: Icon(iconData),
+              color: AppColors.kWhiteColor,
+            ),
+          ),
+          SizedBox(height: 2),
+          Text(itemName),
+        ],
+      ),
     );
   }
 }

@@ -34,7 +34,7 @@ class CustomProductsItem extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
-                      width: screenWidth * .9,
+                      width: screenWidth * .95,
                       height: screenHeight * 0.3,
                       product.imageUrl ??
                           'https://www.nxp.com/assets/images/en/icons/icon-hardware-INA.svg?imwidth=320',

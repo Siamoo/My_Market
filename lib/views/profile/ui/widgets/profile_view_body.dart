@@ -70,6 +70,7 @@ class ProfileViewBody extends StatelessWidget {
                         iconData: Icons.logout,
                         onTap: () async {
                           await context.read<AuthCubit>().signOut();
+                          // ignore: use_build_context_synchronously
                           NavigationService.pushTo(context, LoginView());
                         },
                       ),

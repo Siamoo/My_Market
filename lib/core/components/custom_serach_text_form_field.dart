@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:e_commerce/core/functions/navigation_service.dart';
