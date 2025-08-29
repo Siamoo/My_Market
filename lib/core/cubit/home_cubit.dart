@@ -15,9 +15,10 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> products = [];
   List<ProductModel> searchProducts = [];
   List<ProductModel> categorieProducts = [];
+  List<ProductModel> favoriteProductsList = [];
   SupabaseClient client = Supabase.instance.client;
-  Map<String, bool> favoriteProducts = {};
-  Future<void> getProducts({String? query, String? categorie}) async {
+  Map<String, bool> favoriteProductsInHome = {};
+  Future<void> getProducts({String? query, String? categorie ,bool? isFavoriteView}) async {
     emit(GetDataLoading());
     try {
       Response<dynamic> response = await _apiServices.getData(
@@ -26,10 +27,8 @@ class HomeCubit extends Cubit<HomeState> {
       for (var element in response.data) {
         products.add(ProductModel.fromJson(element));
       }
-      favoriteProducts.addAll({
-        for (var element in products.where((element) => element.favoriteProducts!.isNotEmpty) )
-          element.id!: (element.favoriteProducts!.first.forUser == client.auth.currentUser!.id)
-      });
+      
+      getFavoriteProducts(isFavoriteView);
       search(query);
       categories(categorie);
       emit(GetDataSuccess());
@@ -51,11 +50,11 @@ class HomeCubit extends Cubit<HomeState> {
           "for_user": client.auth.currentUser!.id,
           "for_product": productId,
         });
-        favoriteProducts.addAll({productId: true});
+        favoriteProductsInHome.addAll({productId: true});
         emit(AddOrDeleteFavoriteSuccess());
       } else {
         await _apiServices.deleteData(endpoint);
-        favoriteProducts.removeWhere((key, value) => key == productId);
+        favoriteProductsInHome.removeWhere((key, value) => key == productId);
         emit(AddOrDeleteFavoriteSuccess());
       }
     } catch (e) {
@@ -84,7 +83,21 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+
+  void getFavoriteProducts(bool? isFavoriteView) {
+    favoriteProductsList.clear();
+    for (var product in products) {
+      if (product.favoriteProducts!.isNotEmpty) {
+        if (product.favoriteProducts!.first.forUser ==
+            client.auth.currentUser!.id) {
+          favoriteProductsList.add(product);
+          favoriteProductsInHome.addAll({product.id.toString(): true});
+        }
+      }
+    }
+  }
+
   bool checkIsFavorite(String productId) {
-    return favoriteProducts.containsKey(productId);
+    return favoriteProductsInHome.containsKey(productId);
   }
 }
