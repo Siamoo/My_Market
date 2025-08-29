@@ -137,7 +137,9 @@ class CustomProductsItem extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'buy now',
+                      homeCubit.checkIsPruchase(product.id!)
+                          ? 'Purchased'
+                          : 'buy now',
                       style: TextStyle(color: AppColors.kWhiteColor),
                     ),
                   ),

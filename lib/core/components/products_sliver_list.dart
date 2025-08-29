@@ -9,7 +9,8 @@ class ProductsSliverList extends StatelessWidget {
     required this.screenWidth,
     required this.screenHeight,
     this.searchQuery,
-    this.categorie, this.isFavoriteView,
+    this.categorie, this.isFavoriteView, this.isMyOrdersView,
+
   });
 
   final double screenWidth;
@@ -17,6 +18,7 @@ class ProductsSliverList extends StatelessWidget {
   final String? searchQuery;
   final String? categorie;
   final bool? isFavoriteView;
+  final bool? isMyOrdersView;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -35,6 +37,8 @@ class ProductsSliverList extends StatelessWidget {
               ? context.read<HomeCubit>().categorieProducts
               : isFavoriteView != null
               ? context.read<HomeCubit>().favoriteProductsList
+              : isMyOrdersView != null
+              ? context.read<HomeCubit>().pruchaseList
               : context.read<HomeCubit>().products;
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
