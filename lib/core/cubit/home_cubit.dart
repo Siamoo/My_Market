@@ -16,12 +16,15 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> searchProducts = [];
   List<ProductModel> categorieProducts = [];
   List<ProductModel> favoriteProductsList = [];
+  List<ProductModel> pruchaseList = [];
   SupabaseClient client = Supabase.instance.client;
   Map<String, bool> favoriteProductsInHome = {};
+  Map<String, bool> pruchaseInHome = {};
   Future<void> getProducts({
     String? query,
     String? categorie,
     bool? isFavoriteView,
+    bool? isMyOrdersView,
   }) async {
     emit(GetDataLoading());
     try {
@@ -31,6 +34,7 @@ class HomeCubit extends Cubit<HomeState> {
       for (var element in response.data) {
         products.add(ProductModel.fromJson(element));
       }
+      getPruchaseProducts(isMyOrdersView);
       getFavoriteProducts(isFavoriteView);
       search(query);
       categories(categorie);
@@ -40,6 +44,8 @@ class HomeCubit extends Cubit<HomeState> {
       emit(GetDataError());
     }
   }
+
+
 
   Future addOrDeleteFavorite({required String productId}) async {
     String endpoint =
@@ -67,6 +73,8 @@ class HomeCubit extends Cubit<HomeState> {
       emit(AddOrDeleteFavoriteError());
     }
   }
+
+  
 
   void search(String? query) {
     if (query != null) {
@@ -100,8 +108,24 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
   }
+    void getPruchaseProducts(bool? isMyOrdersView) {
+    pruchaseList.clear();
+    for (var product in products) {
+      if (product.purchaseTable!.isNotEmpty) {
+        if (product.purchaseTable!.first.forUser ==
+            client.auth.currentUser!.id) {
+          pruchaseList.add(product);
+          pruchaseInHome.addAll({product.id.toString(): true});
+        }
+      }
+    }
+  }
 
   bool checkIsFavorite(String productId) {
     return favoriteProductsInHome.containsKey(productId);
+  }
+
+  bool checkIsPruchase(String productId) {
+    return pruchaseInHome.containsKey(productId);
   }
 }
