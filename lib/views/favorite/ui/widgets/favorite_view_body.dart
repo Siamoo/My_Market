@@ -28,31 +28,10 @@ class FavoriteViewBody extends StatelessWidget {
           ProductsSliverList(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
-            
+            isFavoriteView: true,
           ),
         ],
       ),
     );
   }
 }
-
-final List<Map<String, dynamic>> recentProducts = [
-  {
-    'sale': 10,
-    'productName': 'dd Product',
-    'productCount': 253,
-    'pastCount': 290,
-  },
-  {
-    'sale': 20,
-    'productName': 'Another Product',
-    'productCount': 200,
-    'pastCount': 250,
-  },
-  {
-    'sale': 15,
-    'productName': 'Second Product',
-    'productCount': 120,
-    'pastCount': 150,
-  },
-];
