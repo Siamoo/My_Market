@@ -18,7 +18,11 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> favoriteProductsList = [];
   SupabaseClient client = Supabase.instance.client;
   Map<String, bool> favoriteProductsInHome = {};
-  Future<void> getProducts({String? query, String? categorie ,bool? isFavoriteView}) async {
+  Future<void> getProducts({
+    String? query,
+    String? categorie,
+    bool? isFavoriteView,
+  }) async {
     emit(GetDataLoading());
     try {
       Response<dynamic> response = await _apiServices.getData(
@@ -27,7 +31,6 @@ class HomeCubit extends Cubit<HomeState> {
       for (var element in response.data) {
         products.add(ProductModel.fromJson(element));
       }
-      
       getFavoriteProducts(isFavoriteView);
       search(query);
       categories(categorie);
@@ -55,6 +58,8 @@ class HomeCubit extends Cubit<HomeState> {
       } else {
         await _apiServices.deleteData(endpoint);
         favoriteProductsInHome.removeWhere((key, value) => key == productId);
+        products = [];
+        await getProducts();
         emit(AddOrDeleteFavoriteSuccess());
       }
     } catch (e) {
@@ -82,7 +87,6 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
   }
-
 
   void getFavoriteProducts(bool? isFavoriteView) {
     favoriteProductsList.clear();
