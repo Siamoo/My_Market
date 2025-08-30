@@ -45,8 +45,6 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-
-
   Future addOrDeleteFavorite({required String productId}) async {
     String endpoint =
         'favorite_products?for_user=eq.${client.auth.currentUser!.id}&for_product=eq.$productId';
@@ -74,7 +72,22 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  
+  Future addToPruchase({required String productId}) async {
+    String endpoint = 'purchase_table';
+    emit(AddToPurchaseLoading());
+    try {
+      await _apiServices.postData(endpoint, {
+        "is_bought": true,
+        "for_user": client.auth.currentUser!.id,
+        "for_product": productId,
+      });
+      pruchaseInHome.addAll({productId: true});
+      emit(AddToPurchaseSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(AddToPurchaseError());
+    }
+  }
 
   void search(String? query) {
     if (query != null) {
@@ -108,7 +121,8 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
   }
-    void getPruchaseProducts(bool? isMyOrdersView) {
+
+  void getPruchaseProducts(bool? isMyOrdersView) {
     pruchaseList.clear();
     for (var product in products) {
       if (product.purchaseTable!.isNotEmpty) {

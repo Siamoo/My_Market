@@ -16,3 +16,9 @@ final class AddOrDeleteFavoriteLoading extends HomeState {}
 final class AddOrDeleteFavoriteSuccess extends HomeState {}
 
 final class AddOrDeleteFavoriteError extends HomeState {}
+
+final class AddToPurchaseLoading extends HomeState {}
+
+final class AddToPurchaseSuccess extends HomeState {} 
+
+final class AddToPurchaseError extends HomeState {}
