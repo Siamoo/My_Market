@@ -125,7 +125,9 @@ class CustomProductsItem extends StatelessWidget {
                   ),
                   Spacer(),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      homeCubit.addToPruchase(productId: product.id!);
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(
                         horizontal: 20,
