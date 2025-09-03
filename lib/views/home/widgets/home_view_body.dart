@@ -3,48 +3,42 @@ import 'package:e_commerce/core/components/custom_serach_text_form_field.dart';
 import 'package:e_commerce/core/components/products_sliver_list.dart';
 import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:e_commerce/core/functions/sensitive_data.dart';
+import 'package:e_commerce/views/auth/logic/models/user_model.dart';
 import 'package:e_commerce/views/home/widgets/proular_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_with_paymob/pay_with_paymob.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeViewBody extends StatefulWidget {
-  const HomeViewBody({super.key});
- 
+  const HomeViewBody({super.key, required this.userDataModel});
+  final UserDataModel userDataModel;
 
   @override
   State<HomeViewBody> createState() => _HomeViewBodyState();
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
-    final SupabaseClient supabase = Supabase.instance.client;
-
-
   @override
   void initState() {
     PaymentData.initialize(
-      apiKey:
-          paymobApiKey, 
-      iframeId: iframId, 
-      integrationCardId:
-          integrationCardId, 
-      integrationMobileWalletId:
-          integrationMobileWalletId, 
+      apiKey: paymobApiKey,
+      iframeId: iframId,
+      integrationCardId: integrationCardId,
+      integrationMobileWalletId: integrationMobileWalletId,
       // Optional User Data
       userData: UserData(
-        email: supabase.auth.currentUser!.email!, 
-        name: supabase.auth.currentUser!.userMetadata!['name'], 
+        name: widget.userDataModel.name,
+        email: widget.userDataModel.email,
+        lastName: '',
       ),
 
       // Optional Style Customizations
       style: Style(
         primaryColor: AppColors.kPrimaryColor, // Default: Colors.blue
         appBarBackgroundColor: AppColors.kPrimaryColor, // Default: Colors.blue
-        buttonStyle:
-            ElevatedButton.styleFrom(
-              backgroundColor: AppColors.kPrimaryColor,  
-              foregroundColor: AppColors.kWhiteColor,            
-            ), // Default: ElevatedButton.styleFrom()
+        buttonStyle: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.kPrimaryColor,
+          foregroundColor: AppColors.kWhiteColor,
+        ), // Default: ElevatedButton.styleFrom()
         circleProgressColor: AppColors.kPrimaryColor, // Default: Colors.blue
         unselectedColor: Colors.grey, // Default: Colors.grey
       ),

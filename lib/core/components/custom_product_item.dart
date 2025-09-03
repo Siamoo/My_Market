@@ -133,7 +133,7 @@ class CustomProductsItem extends StatelessWidget {
                         context,
                         PaymentView(
                           onPaymentSuccess: () {
-                            log('payment success');
+                            homeCubit.addToPruchase(productId: product.id!);
                           },
                           onPaymentError: () {
                             log('payment error');
