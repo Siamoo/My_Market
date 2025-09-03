@@ -6,15 +6,20 @@ import 'package:e_commerce/core/functions/sensitive_data.dart';
 import 'package:e_commerce/views/home/widgets/proular_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_with_paymob/pay_with_paymob.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
+ 
 
   @override
   State<HomeViewBody> createState() => _HomeViewBodyState();
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
+    final SupabaseClient supabase = Supabase.instance.client;
+
+
   @override
   void initState() {
     PaymentData.initialize(
@@ -27,10 +32,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           integrationMobileWalletId, 
       // Optional User Data
       userData: UserData(
-        email: "User Email", // Optional: Defaults to 'NA'
-        phone: "User Phone", // Optional: Defaults to 'NA'
-        name: "User First Name", // Optional: Defaults to 'NA'
-        lastName: "User Last Name", // Optional: Defaults to 'NA'
+        email: supabase.auth.currentUser!.email!, 
+        name: supabase.auth.currentUser!.userMetadata!['name'], 
       ),
 
       // Optional Style Customizations
