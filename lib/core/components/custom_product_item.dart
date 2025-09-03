@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce/core/cubit/home_cubit.dart';
 import 'package:e_commerce/core/functions/app_colors.dart';
 import 'package:e_commerce/core/functions/navigation_service.dart';
@@ -5,6 +7,7 @@ import 'package:e_commerce/core/models/product_model/product_model.dart';
 import 'package:e_commerce/views/product_details/ui/product_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pay_with_paymob/pay_with_paymob.dart';
 
 class CustomProductsItem extends StatelessWidget {
   const CustomProductsItem({
@@ -126,7 +129,19 @@ class CustomProductsItem extends StatelessWidget {
                   Spacer(),
                   ElevatedButton(
                     onPressed: () {
-                      homeCubit.addToPruchase(productId: product.id!);
+                      NavigationService.pushTo(
+                        context,
+                        PaymentView(
+                          onPaymentSuccess: () {
+                            log('payment success');
+                          },
+                          onPaymentError: () {
+                            log('payment error');
+                          },
+                          price:
+                              double.parse(product.price ?? '300'), // Required: Total price (e.g., 100 for 100 EGP)
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(

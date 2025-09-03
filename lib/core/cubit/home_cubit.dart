@@ -143,3 +143,15 @@ class HomeCubit extends Cubit<HomeState> {
     return pruchaseInHome.containsKey(productId);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,11 +1,53 @@
 import 'package:e_commerce/core/components/custom_image.dart';
 import 'package:e_commerce/core/components/custom_serach_text_form_field.dart';
 import 'package:e_commerce/core/components/products_sliver_list.dart';
+import 'package:e_commerce/core/functions/app_colors.dart';
+import 'package:e_commerce/core/functions/sensitive_data.dart';
 import 'package:e_commerce/views/home/widgets/proular_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:pay_with_paymob/pay_with_paymob.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
+
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+  @override
+  void initState() {
+    PaymentData.initialize(
+      apiKey:
+          paymobApiKey, 
+      iframeId: iframId, 
+      integrationCardId:
+          integrationCardId, 
+      integrationMobileWalletId:
+          integrationMobileWalletId, 
+      // Optional User Data
+      userData: UserData(
+        email: "User Email", // Optional: Defaults to 'NA'
+        phone: "User Phone", // Optional: Defaults to 'NA'
+        name: "User First Name", // Optional: Defaults to 'NA'
+        lastName: "User Last Name", // Optional: Defaults to 'NA'
+      ),
+
+      // Optional Style Customizations
+      style: Style(
+        primaryColor: AppColors.kPrimaryColor, // Default: Colors.blue
+        appBarBackgroundColor: AppColors.kPrimaryColor, // Default: Colors.blue
+        buttonStyle:
+            ElevatedButton.styleFrom(
+              backgroundColor: AppColors.kPrimaryColor,  
+              foregroundColor: AppColors.kWhiteColor,            
+            ), // Default: ElevatedButton.styleFrom()
+        circleProgressColor: AppColors.kPrimaryColor, // Default: Colors.blue
+        unselectedColor: Colors.grey, // Default: Colors.grey
+      ),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
